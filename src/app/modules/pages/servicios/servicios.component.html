@@ -2,83 +2,168 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Administrar Servicios</h5>
-      <ul class="nav d-flex justify-content-between align-items-center">
+      <ul class="nav d-flex  align-items-center">
         <li class="nav-item">
-          <button type="button" class="btn btn-primary mr-2" (click)="mostrarComponenteAgregarServicio()">Crear un Servicio</button>
+          <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#crearServicio">Crear</button>
+
         </li>
         <li class="nav-item">
-          <button type="button" class="btn btn-primary mr-2" (click)="mostrarComponenteAnadirServicio()">Agregar un Servicio</button>
+          <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#aregarServicio" >Agregar</button>
         </li>
         <li class="nav-item">
-          <button type="button" class="btn btn-primary mr-2" (click)="mostrarComponenteModificarServicio()">Modificar un Servicio</button>
+          <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#modificarServicio" >Modificar</button>
         </li>
         <li class="nav-item">
-          <button type="button" class="btn btn-primary mr-2" (click)="mostrarComponenteEliminarServicio()">Servicios mas solicitados</button>
-        </li>
-        <li class="nav-item">
-          <button type="button" class="btn btn-primary mr-2" (click)="mostrarComponenteEliminarServicio()">Eliminar un Servicio</button>
+          <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#eliminarServicio">Eliminar</button>
         </li>
       </ul>
     </div>
-  </div>
-
-  <div class="card col-md-5">
-    <div class="card-body">
-      <h4>Servicios Disponibles</h4>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th class="encabezado-columna">
-                <button class="btn btn-link" (click)="ordenarPorNombre()">
-                  Servicio
-                  <span *ngIf="ordenNombreAscendente">▲</span>
-                  <span *ngIf="!ordenNombreAscendente">▼</span>
-                </button>
-              </th>
-              <th class="encabezado-columna">
-                <button class="btn btn-link" (click)="ordenarPorPrecio()">
-                  Precio
-                  <span *ngIf="ordenPrecioAscendente">▲</span>
-                  <span *ngIf="!ordenPrecioAscendente">▼</span>
-                </button>
-              </th>
-            </tr>
-          </thead>
-          
-          <tbody>
-            <tr *ngFor="let servicio of servicios.slice((paginaActual - 1) * numServicioPorPagina, paginaActual * numServicioPorPagina)">
-              <td>{{ servicio.nombre }}</td>
-              <td>{{ servicio.costo | formatoCosto}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="d-flex justify-content-between align-items-center mt-3">
-          <p class="mb-0">{{ obtenerTextoPaginacion() }}</p>
-          <div>
-            <button class="btn btn-primary mr-2" [disabled]="paginaActual === 1" (click)="paginaActual = paginaActual - 1">Anterior</button>
-            <button class="btn btn-primary" [disabled]="paginaActual * numAgendasPorPagina >= servicios.length" (click)="paginaActual = paginaActual + 1">Siguiente</button>
+<div class="row">
+<!-- Servicios disponibles -->
+    <div class="card col-md-6">
+      <div class="card-body">
+        
+        <div class="table-responsive">
+          <h4>Servicios Disponibles</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="encabezado-columna">
+                  <button class="btn btn-link" (click)="ordenarPorNombre()">
+                    Servicio
+                    <span *ngIf="ordenNombreAscendente">▲</span>
+                    <span *ngIf="!ordenNombreAscendente">▼</span>
+                  </button>
+                </th>
+                <th class="encabezado-columna">
+                  <button class="btn btn-link" (click)="ordenarPorPrecio()">
+                    Precio
+                    <span *ngIf="ordenPrecioAscendente">▲</span>
+                    <span *ngIf="!ordenPrecioAscendente">▼</span>
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              <tr *ngFor="let servicio of servicios.slice((paginaActual - 1) * numServicioPorPagina, paginaActual * numServicioPorPagina)">
+                <td>{{ servicio.nombre }}</td>
+                <td>{{ servicio.costo | formatoCosto}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <p class="mb-0">{{ obtenerTextoPaginacion() }}</p>
+            <div>
+              <button class="btn btn-primary mr-2" [disabled]="paginaActual === 1" (click)="paginaActual = paginaActual - 1">Anterior</button>
+              <button class="btn btn-primary" [disabled]="paginaActual * numAgendasPorPagina >= servicios.length" (click)="paginaActual = paginaActual + 1">Siguiente</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="card col-md-7">
-    <div class="card col-md-6" *ngIf="mostrarAgregarServicio">
-      <app-agregar-servicio (cambiosRealizados)="actualizarServicios()"></app-agregar-servicio>
-    </div>
-
-    <div class="card col-md-6" *ngIf="mostrarEliminarServicio">
-      <app-eliminar-servicio (cambiosRealizados)="actualizarServicios()"></app-eliminar-servicio>
-    </div>
-
-    <div class="card col-md-6" *ngIf="mostrarModificarServicio">
-      <app-modificar-servicio (cambiosRealizados)="actualizarServicios()"></app-modificar-servicio>
-    </div>
-
-    <div class="card col-md-6" *ngIf="mostrarAnadirServicio">
-      <app-anadir-servicio (cambiosRealizados)="actualizarServicios()"></app-anadir-servicio>
+<!-- Servicios TOP -->
+<div class="card col-md-6">
+  <div class="card-body">
+    
+    <div class="table-responsive">
+      <h4>Servicios mas solicitados</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th >
+            Nombre
+            </th>
+            <th>
+              Cantidad/Solicitudes
+            </th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr *ngFor="let servicio of serviciosTop.slice((paginaActualT - 1) * numServicioPorPaginaT, paginaActualT * numServicioPorPaginaT)">
+            <td>{{ servicio.nombre }}</td>
+            <td>{{ servicio.count }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <p class="mb-0">{{ obtenerTextoPaginacionT() }}</p>
+        <div>
+          <button class="btn btn-primary mr-2" [disabled]="paginaActualT === 1" (click)="paginaActualT = paginaActualT - 1">Anterior</button>
+          <button class="btn btn-primary" [disabled]="paginaActualT * numAgendasPorPaginaT >= serviciosTop.length" (click)="paginaActualT = paginaActualT + 1">Siguiente</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+</div>
+  </div>
+
+
+<!-- CREAR SERVICO -->
+  <div class="modal fade" id="crearServicio" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar servicio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <app-agregar-servicio (cambiosRealizados)="actualizarServicios()"></app-agregar-servicio>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- AGREGAR SERVICIO -->
+  <div class="modal fade" id="aregarServicio" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar servicio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <app-anadir-servicio (cambiosRealizados)="actualizarServicios()"></app-anadir-servicio>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+  <!-- MODIFICARSERVICIO -->
+  <div class="modal fade" id="modificarServicio" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Mofidicar servicio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <app-modificar-servicio (cambiosRealizados)="actualizarServicios()"></app-modificar-servicio>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+<!-- ELIMINARSERVICIO -->
+  <div class="modal fade" id="eliminarServicio" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar Servicio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <app-eliminar-servicio (cambiosRealizados)="actualizarServicios()"></app-eliminar-servicio>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+ 
+</div>
+
+

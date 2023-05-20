@@ -1,37 +1,40 @@
 <div class="card">
-    <div class="card-body">
-      <div class="row">
-        <h4>Buscar servicio</h4>
-        <div class="col-12 d-flex align-items-center"> 
-          <div class="form-group ml-2" style="display: flex; align-items: center;">
-            <input style="width: 300px;" type="text" id="rutBuscado" placeholder="Nombre del servicio" [(ngModel)]="servicioBuscado" class="form-control" />
-            <div class="botones ml-2" style="margin-left: -10px;">
-              <button class="btn btn-primary" (click)="buscarServicios()">Buscar</button>
-            </div>
-          </div>
-        </div>
-        
-<form [formGroup]="servicioFrom" class="d-flex justify-content-between">
-  <div class="form-group mr-2">
-    <label for="nombre">Nombre:</label>
-    <input type="text" style="width: 200px;" formControlName="nombre" class="form-control" [readonly]="mostrarInformacion">
-  </div>
-  <div class="form-group mr-2">
-    <label for="costo">Precio:</label>
-    <input type="text" style="width: 100px;" formControlName="costo" class="form-control" [readonly]="mostrarInformacion" [value]="servicioFrom.controls['costo'].value |formatoCosto">
-
-
-  </div> 
-</form>  
-<button class="btn btn-primary mt-2" *ngIf="mostrarInformacion" (click)="toggleInformacion()">Editar</button>
-
-<div class=" d-flex justify-content-betwen">
-  <button class="btn btn-primary mr-2" *ngIf="!mostrarInformacion" (click)="guardarCambios()">Guardar</button>
-  <button class="btn btn-secondary" *ngIf="!mostrarInformacion" (click)="cancelarEdicion()">Cancelar</button>
-</div>    
-       
-        
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group max-height">
+        <label for="servicio">Servicios Disponibles:</label>
+        <select id="servicio" class="form-control" [(ngModel)]="servicioBuscado" name="servicio" [ngModelOptions]="{standalone: true}"
+          (change)="buscarServicios()">
+          <option *ngFor="let servicio of servicios" [ngValue]="servicio.nombre">{{ servicio.nombre }}</option>
+        </select>
       </div>
+      
+      <form [formGroup]="servicioFrom" class="d-flex justify-content-between">
+        <div class="form-group mr-2">
+          <label for="nombre">Nombre:</label>
+          <input type="text" style="width: 200px;" formControlName="nombre" class="form-control"
+            [readonly]="mostrarInformacion">
+        </div>
+        <div class="form-group mr-2">
+          <label for="costo">Precio:</label>
+          <input type="text" style="width: 100px;" formControlName="costo" class="form-control"
+            [readonly]="mostrarInformacion" [value]="servicioFrom.controls['costo'].value |formatoCosto">
+
+
+        </div>
+      </form>
+
+      <div class="col-12">
+        <div class="modal-footer d-flex justify-content-end">
+      <button class="btn btn-primary mt-2" *ngIf="mostrarInformacion" (click)="toggleInformacion()">Editar</button>
+
+      
+        <button class="btn btn-primary mr-2" *ngIf="!mostrarInformacion" (click)="guardarCambios()">Guardar</button>
+        <button class="btn btn-secondary" *ngIf="!mostrarInformacion" (click)="cancelarEdicion()">Cancelar</button>
+   
     </div>
   </div>
-  
+
+    </div>
+  </div>
+</div>

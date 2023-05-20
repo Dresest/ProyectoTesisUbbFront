@@ -8,7 +8,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { AgendaComponent } from './agenda/agenda.component';
 import { ServiciosComponent } from './servicios/servicios.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
-import { CrearPacienteComponent } from './crear-paciente/crear-paciente.component';
+import { CrearPacienteComponent } from './pacientes/crear-paciente/crear-paciente.component';
 
 const childRoutes: Routes = [
   

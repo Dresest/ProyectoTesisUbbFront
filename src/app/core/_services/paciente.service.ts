@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from 'express';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { GenericService } from './generic.service';
 import { ToastService } from './toast.service';
@@ -12,13 +12,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PacienteService {
   base_url = environment.base_url;
+  private idPacienteSeleccionadoSubject = new BehaviorSubject<number>(0);
+  public idPacienteSeleccionado$ = this.idPacienteSeleccionadoSubject.asObservable();
   constructor(
     private http: HttpClient,
-    private genericServices: GenericService,
-    private messageService: MessageService,
-    private toastService: ToastService,
+
   ) { }
 
+
+  enviarIdPaciente(idpaciente: number) {
+    this.idPacienteSeleccionadoSubject.next(idpaciente);
+  }
 
   obtenerPacientes(): Observable<any> {
     return this.http.get(`${this.base_url}/getAllPacientes`);

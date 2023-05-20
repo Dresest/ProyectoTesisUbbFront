@@ -33,6 +33,10 @@ export class AgendaComponent implements OnInit {
     
   }
 
+
+  
+  
+
   obtenerAgendas(): void {
     this.agendaService.obtenerAgendasProfesional(this.userInfo.id).subscribe(respuesta => {
       this.agendas = respuesta.agendas;

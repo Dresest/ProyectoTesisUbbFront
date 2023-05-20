@@ -36,7 +36,7 @@ export class PacientesComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerPacientes();
     this.pacienteForm = this.formBuilder.group({
-      alergia: [''],
+      alergias: [''],
       nombre: [''],
       apellido: [''],
       direccion: [''],
@@ -51,13 +51,13 @@ export class PacientesComponent implements OnInit {
 
  if( this.activo !=""){
     this.pacienteForm.patchValue({
+      alergias: this.pacienteSeleccionado.alergias,
       nombre: this.pacienteSeleccionado.nombre,
       apellido: this.pacienteSeleccionado.apellido,
       direccion: this.pacienteSeleccionado.direccion,
       email: this.pacienteSeleccionado.email,
       rut: this.pacienteSeleccionado.rut,
       telefono: this.pacienteSeleccionado.telefono,
-      alergia: this.pacienteSeleccionado.alergia,
       edad: this.pacienteSeleccionado.edad,
       prevencion: this.pacienteSeleccionado.prevencion,
       is_activo: this.activo,
@@ -83,6 +83,7 @@ export class PacientesComponent implements OnInit {
   seleccionarPaciente(paciente: any): void {
     this.pacienteSeleccionado = paciente;
     console.log(this.pacienteSeleccionado);
+    this.pacienteService.enviarIdPaciente(paciente.rut); 
     if(this.pacienteSeleccionado.is_activo ==true){
       this.activo = "Activado";
     }else{

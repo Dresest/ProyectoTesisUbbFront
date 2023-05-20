@@ -1,15 +1,20 @@
 <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Eliminar Servicio</h5>
       <form>
         <div class="form-group max-height">
-          <label for="servicio">Servicio:</label>
+          <label for="servicio">Servicios Disponibles:</label>
           <select id="servicio" class="form-control" [(ngModel)]="servicioSeleccionado" name="servicio" [ngModelOptions]="{standalone: true}">
             <option *ngFor="let servicio of servicios" [ngValue]="servicio.nombre">{{ servicio.nombre }}</option>
         </select>
           
         </div>
-        <button type="button" class="btn btn-danger" (click)="buscarServicioPorNombre()">Eliminar</button>
+
+        <div class="col-12">
+          <div class="modal-footer d-flex justify-content-end">
+            <button class="btn btn-secondary mt-2" data-bs-dismiss="modal" >cancelar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="buscarServicioPorNombre()">Eliminar</button>
+      </div>
+    </div>
       </form>
     </div>
   </div>

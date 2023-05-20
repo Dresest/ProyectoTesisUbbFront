@@ -15,6 +15,9 @@ export class servicioService {
     obtenerServiciosPorProfesional(id_profesional: number): Observable<any> {
     return this.http.get(`${this.base_url}/profesionales/${id_profesional}/servicios`);
   }
+    obtenerServiciosTop(id_profesional: number): Observable<any> {
+    return this.http.get(`${this.base_url}/obtenerServiciosMasSolicitados/${id_profesional}`);
+  }
   obtenerServiciosNoRelacionadosPorProfesional(id_profesional: number): Observable<any> {
     return this.http.get(`${this.base_url}/obtenerServiciosNoRelacionadosPorProfesional/${id_profesional}`);
   }

@@ -10,10 +10,23 @@
             </ul>
 
         </div>
-
+        <!-- Datos de paciente -->
         <div class="row">
-            <div class="col-12">
-                <h4>Datos del paciente</h4>
+            <div class="col-12 paciente">
+
+
+                <h4>Datos del paciente
+                    <button class="btn btn-primary mt-2" *ngIf="mostrarInformacion"
+                        (click)="toggleInformacion()">Editar</button>
+                    <button class="btn btn-primary mt-2" *ngIf="mostrarInformacion"
+                        (click)="irAgregarPaciente()">Agregar
+                        paciente</button>
+
+                    <button class="btn btn-primary mr-2" *ngIf="!mostrarInformacion"
+                        (click)="guardarCambios()">Guardar</button>
+                    <button class="btn btn-secondary" *ngIf="!mostrarInformacion"
+                        (click)="cancelarEdicion()">Cancelar</button>
+                </h4>
 
                 <form [formGroup]="pacienteForm">
                     <div class="form-row">
@@ -22,8 +35,8 @@
                             <input type="text" formControlName="nombre" class="form-control mr-2"
                                 [readonly]="mostrarInformacion">
 
-                            <label for="alergia" class="mr-2">alergia:</label>
-                            <input type="text" formControlName="alergia" class="form-control"
+                            <label for="alergias" class="mr-2">alergias:</label>
+                            <input type="text" formControlName="alergias" class="form-control"
                                 [readonly]="mostrarInformacion">
 
                         </div>
@@ -53,7 +66,7 @@
                             <label for="rut" class="mr-2">Rut:</label>
                             <input type="text" formControlName="rut" class="form-control"
                                 [readonly]="mostrarInformacion">
-                            
+
                             <label for="is_activo" class="mr-2">Estado:</label>
                             <input type="text" formControlName="is_activo" class="form-control"
                                 [readonly]="mostrarInformacion">
@@ -72,15 +85,7 @@
 
 
                 </form>
-                <button class="btn btn-primary mt-2" *ngIf="mostrarInformacion"
-                    (click)="toggleInformacion()">Editar</button>
-                <button class="btn btn-primary mt-2" *ngIf="mostrarInformacion" (click)="irAgregarPaciente()">Agregar
-                    paciente</button>
 
-                <button class="btn btn-primary mr-2" *ngIf="!mostrarInformacion"
-                    (click)="guardarCambios()">Guardar</button>
-                <button class="btn btn-secondary" *ngIf="!mostrarInformacion"
-                    (click)="cancelarEdicion()">Cancelar</button>
 
 
             </div>
@@ -89,5 +94,9 @@
 
 
     </div>
-
+    <div >
+       
+            <app-ficha-clinica></app-ficha-clinica>
+        
+    </div>
 </div>

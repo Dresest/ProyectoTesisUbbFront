@@ -25,7 +25,7 @@ import { FormatoCostoPipe } from 'src/app/core/_pipes/formatoMoneda.pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EditarAgendaComponent } from './agenda/editar-agenda/editar-agenda.component';
-import { CrearPacienteComponent } from './crear-paciente/crear-paciente.component';
+import { CrearPacienteComponent } from './pacientes/crear-paciente/crear-paciente.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
