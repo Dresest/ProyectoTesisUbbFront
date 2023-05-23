@@ -34,13 +34,49 @@
 
           <thead>
             <tr>
-              <th scope="col">Paciente</th>
-              <th scope="col">Rut</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Hora</th>
-              <th scope="col">Servicio</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Acciones</th>
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorPaciente()">
+                  Paciente
+                  <span *ngIf="ordenAscendenteP">▼</span>
+                  <span *ngIf="!ordenAscendenteP">▲</span>
+                </button>
+              </th>
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorRut()">
+                  Rut
+                  <span *ngIf="ordenAscendenteR">▼</span>
+                  <span *ngIf="!ordenAscendenteR">▲</span>
+                </button>
+              </th>
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorFecha()">
+                  Fecha
+                  <span *ngIf="ordenAscendenteF">▼</span>
+                  <span *ngIf="!ordenAscendenteF">▲</span>
+                </button>
+              </th>
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorHora()">
+                  Hora
+                  <span *ngIf="ordenAscendenteH">▼</span>
+                  <span *ngIf="!ordenAscendenteH">▲</span>
+                </button>
+              </th>
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorServicio()">
+                  Servicio
+                  <span *ngIf="ordenAscendenteS">▼</span>
+                  <span *ngIf="!ordenAscendenteS">▲</span>
+                </button>
+              </th>
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorEstado()">
+                  Estado
+                  <span *ngIf="ordenAscendente">▼</span>
+                  <span *ngIf="!ordenAscendente">▲</span>
+                </button>
+              </th> 
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>

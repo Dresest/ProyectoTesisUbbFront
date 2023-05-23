@@ -22,7 +22,7 @@ private subscription!: Subscription;
   estadoSeleccionado: string = '';
   userInfo: any;
   fechaAgendamiento: Date = new Date();
-  horaAgendamiento: string = '';
+  horaAgendamiento:any;
   idServicio: any;
   nombrePaciente:any;
   idAgendaSeleccionada: any;
@@ -83,9 +83,13 @@ private subscription!: Subscription;
   
     this.agendaService.obtenerAgendaPorID(this.idAgendaSeleccionada).subscribe(respuesta => {
     this.agendaSeleccionada = respuesta.agenda;  
+    console.log(this.agendaSeleccionada);
     this.nombrePaciente=this.agendaSeleccionada.paciente.nombre;
-    this.pacienteSeleccionado=this.agendaSeleccionada.paciente.id_paciente;
-    console.log(this.agendaSeleccionada  );
+    this.servicioSeleccionado=this.agendaSeleccionada.servicio.nombre;
+    this.horaAgendamiento=this.agendaSeleccionada.hora_agendamiento;
+    this.fechaAgendamiento=this.agendaSeleccionada.fecha_agendamiento;
+    this.estadoSeleccionado=this.agendaSeleccionada.estado.status;
+
 
     });
   }

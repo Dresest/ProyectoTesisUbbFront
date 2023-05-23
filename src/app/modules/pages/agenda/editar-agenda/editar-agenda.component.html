@@ -18,7 +18,7 @@
         <!-- Fecha -->
         <div class="form-group mr-2">
           <label for="fecha_agendamiento">Fecha:</label>
-          <input type="text" placeholder="1/1/202x" [value]="fechaAgendamiento" formControlName="fecha_agendamiento" class="form-control" matInput
+          <input type="text" placeholder="1/1/202x" formControlName="fecha_agendamiento" class="form-control" matInput
             [matDatepicker]="picker" [(ngModel)]="fechaAgendamiento" [matDatepickerFilter]="fechaPermitida">
         </div>
         <div class="calendar">

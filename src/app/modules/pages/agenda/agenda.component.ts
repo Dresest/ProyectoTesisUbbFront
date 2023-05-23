@@ -18,6 +18,12 @@ export class AgendaComponent implements OnInit {
   paginaActual: number = 1;
   mostrarAnadirAgenda = false;
   mostrarEditarAgenda=false;
+  ordenAscendente: boolean = true;
+  ordenAscendenteP: boolean = true;
+  ordenAscendenteR: boolean = true;
+  ordenAscendenteF: boolean = true;
+  ordenAscendenteH: boolean = true;
+  ordenAscendenteS: boolean = true;
 
   @Output() cambiosRealizados = new EventEmitter();
   
@@ -40,6 +46,13 @@ export class AgendaComponent implements OnInit {
   obtenerAgendas(): void {
     this.agendaService.obtenerAgendasProfesional(this.userInfo.id).subscribe(respuesta => {
       this.agendas = respuesta.agendas;
+      const fechaHoy = new Date();
+      fechaHoy.setHours(0, 0, 0, 0); 
+      
+      this.agendas = this.agendas.filter(
+        (agenda) => new Date(agenda.fecha_agendamiento) >= fechaHoy
+      );
+      console.log(this.agendas);
     });
   }
 
@@ -87,5 +100,87 @@ export class AgendaComponent implements OnInit {
     this.mostrarEditarAgenda = false;
     this.obtenerAgendas();
   }
+  ordenarPorEstado(): void {
+    this.agendas.sort((a, b) => {
+      const estadoA = a.estado.status.toLowerCase();
+      const estadoB = b.estado.status.toLowerCase();
+      if (estadoA < estadoB) {
+        return this.ordenAscendente ? -1 : 1;
+      }
+      if (estadoA > estadoB) {
+        return this.ordenAscendente ? 1 : -1;
+      }
+      return 0;
+    });
+    this.ordenAscendente = !this.ordenAscendente;
+  }
+  
+  
 
+  ordenarPorServicio(): void {
+    this.agendas.sort((a, b) => {
+      const servicioA = a.servicio.nombre.toLowerCase();
+      const servicioB = b.servicio.nombre.toLowerCase();
+      if (servicioA < servicioB) {
+        return this.ordenAscendenteS ? -1 : 1;
+      }
+      if (servicioA > servicioB) {
+        return this.ordenAscendenteS ? 1 : -1;
+      }
+      return 0;
+    });
+    this.ordenAscendenteS = !this.ordenAscendenteS;
+  }
+  
+  ordenarPorPaciente(): void {
+    this.agendas.sort((a, b) => {
+      const nombreA = a.paciente.nombre.toLowerCase();
+      const nombreB = b.paciente.nombre.toLowerCase();
+      if (nombreA < nombreB) {
+        return this.ordenAscendenteP ? -1 : 1;
+      }
+      if (nombreA > nombreB) {
+        return this.ordenAscendenteP ? 1 : -1;
+      }
+      return 0;
+    });
+    this.ordenAscendenteP = !this.ordenAscendenteP;
+  }
+  
+  ordenarPorRut(): void {
+    this.agendas.reverse();
+    this.ordenAscendenteR = !this.ordenAscendenteR;
+  }
+  ordenarPorFecha(): void {
+    this.agendas.sort((a, b) => {
+      const fechaA = new Date(a.fecha_agendamiento);
+      const fechaB = new Date(b.fecha_agendamiento);
+      if (fechaA < fechaB) {
+        return this.ordenAscendenteF ? -1 : 1;
+      }
+      if (fechaA > fechaB) {
+        return this.ordenAscendenteF ? 1 : -1;
+      }
+      return 0;
+    });
+    this.ordenAscendenteF = !this.ordenAscendenteF;
+  }
+  
+  ordenarPorHora(): void {
+    this.agendas.sort((a, b) => {
+      const horaA = new Date(`1970-01-01T${a.hora_agendamiento}`);
+      const horaB = new Date(`1970-01-01T${b.hora_agendamiento}`);
+      if (horaA < horaB) {
+        return this.ordenAscendenteH ? -1 : 1;
+      }
+      if (horaA > horaB) {
+        return this.ordenAscendenteH ? 1 : -1;
+      }
+      return 0;
+    });
+    this.ordenAscendenteH = !this.ordenAscendenteH;
+  }
+  
+  
+  
 }

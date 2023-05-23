@@ -7,11 +7,42 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Paciente</th>
-        <th>Rut</th>
-        <th>Fecha</th>
-        <th>Hora</th>
-        <th>Servicio</th>
+      
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorPaciente()">
+            Paciente
+            <span *ngIf="ordenAscendenteP">▼</span>
+            <span *ngIf="!ordenAscendenteP">▲</span>
+          </button>
+        </th>
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorRut()">
+            Rut
+            <span *ngIf="ordenAscendenteR">▼</span>
+            <span *ngIf="!ordenAscendenteR">▲</span>
+          </button>
+        </th>
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorFecha()">
+            Fecha
+            <span *ngIf="ordenAscendenteF">▼</span>
+            <span *ngIf="!ordenAscendenteF">▲</span>
+          </button>
+        </th>
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorHora()">
+            Hora
+            <span *ngIf="ordenAscendenteH">▼</span>
+            <span *ngIf="!ordenAscendenteH">▲</span>
+          </button>
+        </th>
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorServicio()">
+            Servicio
+            <span *ngIf="ordenAscendenteS">▼</span>
+            <span *ngIf="!ordenAscendenteS">▲</span>
+          </button>
+        </th>
         <th class="encabezado-columna">
           <button class="btn btn-link" (click)="ordenarPorEstado()">
             Estado
