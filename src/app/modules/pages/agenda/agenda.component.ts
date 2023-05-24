@@ -52,7 +52,7 @@ export class AgendaComponent implements OnInit {
       this.agendas = this.agendas.filter(
         (agenda) => new Date(agenda.fecha_agendamiento) >= fechaHoy
       );
-      console.log(this.agendas);
+
     });
   }
 
@@ -85,13 +85,16 @@ export class AgendaComponent implements OnInit {
   }
 
   mostrarComponenteAgregarAgenda() {
-    this.mostrarAnadirAgenda = true;
 
+    this.mostrarAnadirAgenda = true;
+    this.mostrarEditarAgenda=false;
   }
 
   mostrarComponenteEditarAgenda(idAgenda:number) {
     this.agendaService.enviarIdAgenda(idAgenda);
     this.mostrarEditarAgenda = true;
+    this.mostrarAnadirAgenda = false;
+    
   }
 
   

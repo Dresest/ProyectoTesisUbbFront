@@ -11,6 +11,7 @@ import { ToastService } from 'src/app/core/_services/toast.service';
 export class AnadirServicioComponent implements OnInit {
   userInfo: any;
   servicios: any[] = [];
+  serviciosAll: any[] = [];
   servicioSeleccionado:any;
   idServicio:any;
   
@@ -27,10 +28,26 @@ export class AnadirServicioComponent implements OnInit {
     
   }
   obtenerServicios(): void {
-    this._servicioService.obtenerServiciosNoRelacionadosPorProfesional(this.userInfo.id).subscribe(respuesta => {
+    this._servicioService.obtenerServiciosPorProfesional(this.userInfo.id).subscribe(respuesta => {
       this.servicios = respuesta.servicios;
+      console.log(this.servicios);
+  
+      this._servicioService.obtenerTodo().subscribe(respuestaAll => {
+        this.serviciosAll = respuestaAll.servicios;
+  
+        // Crear un conjunto de servicios únicos
+        const serviciosUnicos = new Set([...this.servicios, ...this.serviciosAll]);
+  
+        // Convertir el conjunto de servicios a un array
+        this.servicios = Array.from(serviciosUnicos);
+  
+        console.log(this.servicios);
+      });
     });
   }
+  
+  
+  
 
   buscarServicioPorNombre(): void {
 

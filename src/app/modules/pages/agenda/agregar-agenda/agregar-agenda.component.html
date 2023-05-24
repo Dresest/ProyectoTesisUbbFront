@@ -22,7 +22,7 @@
       <div class="form-group mr-2">
         <label for="fecha_agendamiento">Fecha:</label>
         <input type="text" placeholder="1/1/202x" formControlName="fecha_agendamiento" class="form-control" matInput
-          [matDatepicker]="picker">
+          [matDatepicker]="picker"  [matDatepickerFilter]="fechaPermitida">
       </div>
       <div class="calendar">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -43,9 +43,9 @@
       </div>
       
     </form>
-    <div class=" d-flex justify-content-betwen">
-      <button class="btn btn-primary mr-2" (click)="guardarCambios()">Guardar</button>
+    <div class="d-flex justify-content-betwen">
+      <button class="btn btn-primary mr-2" (click)="guardarCambios()" [disabled]="!camposCompletos()">Guardar</button>
       <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
     </div>
-      </div>
-    </div>
+  </div>
+</div>

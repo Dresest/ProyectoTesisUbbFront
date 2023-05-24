@@ -73,9 +73,9 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // forgot(body: any){
-  //   return this.genericServices.postGeneric('/recuperar', '', body)
-  // }
+  forgot(body: any){
+    return this.genericServices.postGeneric('/recuperar', '', body)
+  }
 
   nuevaPassword(body: any, token: any){   
     return this.genericServices.postGenericHeader('/nueva-password', '',body,token)

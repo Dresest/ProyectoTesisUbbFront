@@ -6,8 +6,6 @@ import { PacienteService } from 'src/app/core/_services/paciente.service';
 import { servicioService } from 'src/app/core/_services/servicio-profesional.service';
 import { ToastService } from 'src/app/core/_services/toast.service';
 
-
-
 @Component({
   selector: 'app-agregar-agenda',
   templateUrl: './agregar-agenda.component.html',
@@ -16,27 +14,23 @@ import { ToastService } from 'src/app/core/_services/toast.service';
 export class AgregarAgendaComponent implements OnInit {
   servicioFrom: FormGroup = new FormGroup({});
   mostrarInformacion = true;
-  // iNFORMACION PARA AGREGAR AGENDA
+  // INFORMACION PARA AGREGAR AGENDA
   pacienteSeleccionado: any;
-  servicioSeleccionado:any;
+  servicioSeleccionado: any;
   userInfo: any;
-  fechaAgendamiento: Date = new Date();
+  idServicio: any;
   horaAgendamiento: string = '';
-  idServicio : any;
-
   agendas: any[] = [];
   pacientes: any[] = [];
   servicios: any[] = [];
   idAgenda: any;
   searchText: string = '';
   mostrarLista: boolean = false;
-  
-  
+
   horas: string[] = [
     '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
     '14:00', '15:00', '16:00', '17:00', '18:00'
   ];
-  
 
   @Output() cambiosRealizados = new EventEmitter();
 
@@ -54,7 +48,7 @@ export class AgregarAgendaComponent implements OnInit {
     this.obtenerPacientes();
     this.obtenerServicios();
     this.servicioFrom = this.formBuilder.group({
-      fecha_agendamiento: '',
+      fecha_agendamiento: new Date(),
       hora_agendamiento: '',
       servicio: ''
     });
@@ -63,7 +57,6 @@ export class AgregarAgendaComponent implements OnInit {
   obtenerServicios(): void {
     this._servicioService.obtenerServiciosNoRelacionadosPorProfesional(this.userInfo.id).subscribe(respuesta => {
       this.servicios = respuesta.servicios;
-      
     });
   }
 
@@ -71,7 +64,6 @@ export class AgregarAgendaComponent implements OnInit {
     this.pacienteService.obtenerPacientes().subscribe(respuesta => {
       this.pacientes = respuesta.paciente;
       this.filtrarOpciones(this.searchText);
-      
     });
   }
 
@@ -83,29 +75,24 @@ export class AgregarAgendaComponent implements OnInit {
     this.pacienteSeleccionado = paciente;
     this.searchText = paciente.nombre;
     this.mostrarLista = false;
-
   }
-
-
 
   toggleInformacion(): void {
-    if (this.mostrarInformacion) {
-    }
     this.mostrarInformacion = !this.mostrarInformacion;
   }
+
   cancelarEdicion(): void {
-  
     this.ngOnInit();
     this.cambiosRealizados.emit();
   }
+
   buscarServicios(): void {
-    
     if (this.servicioSeleccionado) {
       this._servicioService.obtenerServiciosPorNombre(this.servicioSeleccionado).subscribe(
         respuesta => {
           if (respuesta.servicio) {
-             this.idServicio = respuesta.servicio.id_servicio;
-             console.log(this.idServicio);
+            this.idServicio = respuesta.servicio.id_servicio;
+           
           }
         },
         error => {
@@ -113,27 +100,39 @@ export class AgregarAgendaComponent implements OnInit {
         }
       );
     } else {
-      this.toastService.showError('Ingrese un nombre valido');
+      this.toastService.showError('Ingrese un nombre válido');
     }
   }
 
-  
+  camposCompletos(): boolean {
+    return (
+      this.searchText &&
+      this.servicioFrom.value.fecha_agendamiento &&
+      this.servicioFrom.value.hora_agendamiento &&
+      this.servicioSeleccionado &&
+      this.pacienteSeleccionado
+    );
+  }
+  fechaPermitida = (d: Date | null): boolean => {
+    const fechaActual = new Date();
+    return !d || d >= fechaActual;
+  }
   guardarCambios(): void {
-   
     const nuevaAgenda = {
-      fecha_agendamiento: this.fechaAgendamiento.toISOString().substring(0, 10),
-      hora_agendamiento: this.horaAgendamiento,
+      fecha_agendamiento: this.servicioFrom.value.fecha_agendamiento.toISOString().substring(0, 10),
+      hora_agendamiento: this.servicioFrom.value.hora_agendamiento,
       id_paciente: this.pacienteSeleccionado.id_paciente,
       idProfesional: this.userInfo.id,
-      idServicio: this.idServicio, 
+      idServicio: this.idServicio,
     };
-    console.log(nuevaAgenda);
-    this.agendaService.agregarAgenda(nuevaAgenda).subscribe(respuesta => {
-      this.toastService.showSuccess(respuesta.message);
-      this.cambiosRealizados.emit();
-    }, error => {
-      this.toastService.showError(error.message);
-    });
-
-}
+    this.agendaService.agregarAgenda(nuevaAgenda).subscribe(
+      respuesta => {
+        this.toastService.showSuccess(respuesta.message);
+        this.cambiosRealizados.emit();
+      },
+      error => {
+        this.toastService.showError(error.message);
+      }
+    );
+  }
 }

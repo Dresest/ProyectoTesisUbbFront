@@ -83,7 +83,7 @@ private subscription!: Subscription;
   
     this.agendaService.obtenerAgendaPorID(this.idAgendaSeleccionada).subscribe(respuesta => {
     this.agendaSeleccionada = respuesta.agenda;  
-    console.log(this.agendaSeleccionada);
+
     this.nombrePaciente=this.agendaSeleccionada.paciente.nombre;
     this.servicioSeleccionado=this.agendaSeleccionada.servicio.nombre;
     this.horaAgendamiento=this.agendaSeleccionada.hora_agendamiento;
@@ -141,7 +141,7 @@ private subscription!: Subscription;
         respuesta => {
           if (respuesta.servicio) {
             this.idServicio = respuesta.servicio.id_servicio;
-            console.log(this.idServicio);
+           
           }
         },
         error => {
@@ -176,7 +176,7 @@ private subscription!: Subscription;
       id_estado: this.estadoNumero,
     };
 
-    console.log(nuevaAgenda);
+
     this.agendaService.editarAgenda( this.idAgendaSeleccionada ,nuevaAgenda).subscribe(respuesta => {
       this.toastService.showSuccess(respuesta.message);
       this.cambiosRealizados.emit();

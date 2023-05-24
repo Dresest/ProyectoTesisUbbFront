@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 export class PacientesComponent implements OnInit {
   pacientes: any[] = [];
   searchText: string = '';
+  pacienteFicha: boolean = false;
+
   mostrarLista: boolean = false;
   pacienteSeleccionado: any;
   pacienteForm: FormGroup = new FormGroup({});
@@ -82,7 +84,7 @@ export class PacientesComponent implements OnInit {
 
   seleccionarPaciente(paciente: any): void {
     this.pacienteSeleccionado = paciente;
-    console.log(this.pacienteSeleccionado);
+    this.pacienteFicha=true;
     this.pacienteService.enviarIdPaciente(paciente.rut); 
     if(this.pacienteSeleccionado.is_activo ==true){
       this.activo = "Activado";
@@ -114,7 +116,8 @@ export class PacientesComponent implements OnInit {
     this.mostrarInformacion = true;
   
     const datosFormulario = this.pacienteForm.value;
-    console.log(datosFormulario);
+
+    
     const hayCambios = JSON.stringify(this.informacionOriginal) !== JSON.stringify(datosFormulario);
   
     if (hayCambios) {

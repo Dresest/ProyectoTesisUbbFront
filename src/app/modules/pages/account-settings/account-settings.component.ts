@@ -31,6 +31,7 @@ export class AccountSettingsComponent implements OnInit {
     this.links = document.querySelectorAll('.selector');
     this.checkCurrentTheme();
     this.profesional = this._authService.obtenerInformacionToken();
+    console.log(this.profesional);
     this.profesionalForm = this.formBuilder.group({
       nombre: [''],
       apellido: [''],

@@ -12,6 +12,10 @@ export class servicioService {
       private http: HttpClient, 
       ) { }
       
+      
+    obtenerTodo(): Observable<any> {
+    return this.http.get(`${this.base_url}/allServicios`);
+  }
     obtenerServiciosPorProfesional(id_profesional: number): Observable<any> {
     return this.http.get(`${this.base_url}/profesionales/${id_profesional}/servicios`);
   }

@@ -17,7 +17,7 @@ import { AgregarServicioComponent } from './servicios/agregar-servicio/agregar-s
 import { EliminarServicioComponent } from './servicios/eliminar-servicio/eliminar-servicio.component';
 import { AnadirServicioComponent } from './servicios/anadir-servicio/anadir-servicio.component';
 import { AgregarAgendaComponent } from './agenda/agregar-agenda/agregar-agenda.component';
-
+import { NuevaPasswordComponent } from './nueva-password/nueva-password.component';
 // pipes
 import { HoraPipe } from '../../core/_pipes/hora.pipe';
 import { FormatoCostoPipe } from 'src/app/core/_pipes/formatoMoneda.pipe';
@@ -39,6 +39,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { SortPipe } from 'src/app/core/_pipes/sort.pipe';
+import { RecuperarComponent } from './recuperar/recuperar.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { SortPipe } from 'src/app/core/_pipes/sort.pipe';
     AgregarAgendaComponent,
     EditarAgendaComponent,
     CrearPacienteComponent,
- 
+    NuevaPasswordComponent,
+    RecuperarComponent
 
   ], exports: [
     InicioComponent,
@@ -75,14 +77,15 @@ import { SortPipe } from 'src/app/core/_pipes/sort.pipe';
     ToastModule,
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     MatNativeDateModule,
     MatDatepickerModule,
     RouterModule,
     NgChartsModule,
     MatListModule,
    
-    FormsModule,
-    ReactiveFormsModule,
+    
     HttpClientModule,
     CommonModule,
     MatListModule,
