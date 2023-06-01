@@ -75,7 +75,7 @@ export class NuevaPasswordComponent implements OnInit {
 
   onSubmit(): void {
     const password = this.passwordForm.get('password')!.value;
-    const body = { password: password };
+    const body = { contraseña: password };
     this.authService.nuevaPassword(body, this.token).subscribe({
       next: (res) => {
         localStorage.clear();

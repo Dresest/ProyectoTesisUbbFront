@@ -23,7 +23,7 @@
             <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a>
           </li>
         </ul>
-      
+        <span class="nombrePerfil">{{ nombreUsuario }}</span>
         <ul class="navbar-nav my-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,10 +41,10 @@
                   </div>
                 </li>
                 <li role="separator" class="divider"></li>
-                <li><a routerLink="acccount-seting"><i class="ti-settings"></i> Accwount Setting</a></li>
+                <li><a routerLink="acccount-seting"><i class="ti-settings"></i> Configuración de perfil</a></li>
                 <li role="separator" class="divider"></li>
                 <li>
-                  <a href="#" (click)="onLogout()" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                  <a href="#" (click)="onLogout()" class="dropdown-item"><i class="fa fa-power-off"></i> Cerrar sesión</a>
                 </li>
               </ul>
             </div>

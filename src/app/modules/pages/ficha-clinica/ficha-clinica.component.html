@@ -1,32 +1,55 @@
 <div class="row">
   <!-- LISTADO DE FICHAS CLINICAS -->
-  <div class="col-md-6">
-    <div class="table-responsive mt-3" *ngIf="fichasClinicas">
-      <table class="table table-hover table-striped custom-table">
-        <thead>
-          <tr>
-            <th colspan="2"><h4>Fichas clínicas</h4></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let ficha of fichasClinicas">
-            <td>
-              <a class="table-link" (click)="mostrarDetallesFicha(ficha.id_ficha)">
-                Ficha N° {{ ficha.id_ficha }}
-              </a>
-            </td>
-            <td>
-              <a class="table-link" (click)="mostrarDetallesFicha(ficha.id_ficha)">
-                Fecha: {{ ficha.fecha_creacion | date: 'dd/MM/yyyy' }}
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="col-md-5">
+    <div class="card mt-3" *ngIf="fichasClinicas">
+      <div class="card-header">
+        <h4 class="card-title">Listado de Fichas clínicas</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-striped custom-table">
+            <thead>
+              <tr>
+                <th>Ficha N°</th>
+                <th>Fecha de Creación</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ficha of fichasClinicasPaginadas">
+                <td>
+                  <a class="table-link" (click)="mostrarDetallesFicha(ficha.id_ficha)">
+                    {{ ficha.id_ficha }}
+                  </a>
+                </td>
+                <td>
+                  <a class="table-link" (click)="mostrarDetallesFicha(ficha.id_ficha)">
+                    {{ ficha.fecha_creacion | date: 'dd/MM/yyyy' }}
+                  </a>
+                </td>
+                <td>
+                  <button class="btn btn-primary" (click)="mostrarDetallesFicha(ficha.id_ficha)">Editar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="pagination-container">
+          <button class="btn btn-secondary" (click)="irPaginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
+          <span class="page-number">{{ paginaActual }}</span>
+          <button class="btn btn-secondary" (click)="irPaginaSiguiente()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+        </div>
+      </div>
     </div>
   </div>
   
-    <div class="card col-md-6 ficha">
+  
+  
+  
+  
+    <div class="card col-md-7 ficha">
       <div class="card-body">
         <div class="row">
           <div class="col-12">
@@ -35,23 +58,45 @@
               <div class="form-group">
                 <label for="motivo_consulta">Motivo de consulta:</label>
                 <textarea formControlName="motivo_consulta" class="form-control" rows="3" [readonly]="mostrarInformacion"></textarea>
+                <small class="text-danger"
+                       *ngIf="fichaClinicaForm.get('motivo_consulta')?.touched && fichaClinicaForm.get('motivo_consulta')?.errors?.['required']">
+                  El motivo de consulta es requerido
+                </small>
               </div>
               <div class="form-group">
                 <label for="examen_fisico">Examen físico:</label>
                 <textarea formControlName="examen_fisico" class="form-control" rows="3" [readonly]="mostrarInformacion"></textarea>
+                <small class="text-danger"
+                       *ngIf="fichaClinicaForm.get('examen_fisico')?.touched && fichaClinicaForm.get('examen_fisico')?.errors?.['required']">
+                  El examen físico es requerido
+                </small>
               </div>
               <div class="form-group">
                 <label for="intervencion">Intervención:</label>
                 <textarea formControlName="intervencion" class="form-control" rows="3" [readonly]="mostrarInformacion"></textarea>
+                <small class="text-danger"
+                       *ngIf="fichaClinicaForm.get('intervencion')?.touched && fichaClinicaForm.get('intervencion')?.errors?.['required']">
+                  La intervención es requerida
+                </small>
               </div>
               <div class="form-group">
                 <label for="indicaciones">Indicación:</label>
                 <textarea formControlName="indicaciones" class="form-control" rows="3" [readonly]="mostrarInformacion"></textarea>
+                <small class="text-danger"
+                       *ngIf="fichaClinicaForm.get('indicaciones')?.touched && fichaClinicaForm.get('indicaciones')?.errors?.['required']">
+                  Las indicaciones son requeridas
+                </small>
               </div>
             </form>
-            <button class="btn btn-primary mt-2" *ngIf="mostrarInformacion" (click)="toggleInformacion()">Editar</button>
-            <button class="btn btn-primary mr-2" *ngIf="!mostrarInformacion" (click)="guardarCambios()">Guardar</button>
-            <button class="btn btn-secondary" *ngIf="!mostrarInformacion" (click)="cancelarEdicion()">Cancelar</button>
+            
+
+            <button class="btn btn-primary mt-2" *ngIf="agregarBtn" (click)="mostrarBtn()">Agregar</button>
+            
+            <button class="btn btn-primary mr-2" *ngIf="!agregandoFicha && !mostrarInformacion" (click)="guardarCambios()">Guardar</button>
+            <button class="btn btn-secondary" *ngIf="!agregandoFicha && !mostrarInformacion" (click)="cancelarEdicion()">Cancelar</button>
+            <button class="btn btn-primary mr-2" *ngIf="agregandoFicha" [disabled]="!fichaClinicaForm.valid" (click)="agregarFicha()">Guardar Ficha</button>
+
+            <button class="btn btn-secondary" *ngIf="agregandoFicha" (click)="cancelarEdicionF()">Cancelar Ficha</button>
           </div>
         </div>
       </div>

@@ -23,6 +23,10 @@
         <label for="fecha_agendamiento">Fecha:</label>
         <input type="text" placeholder="1/1/202x" formControlName="fecha_agendamiento" class="form-control" matInput
           [matDatepicker]="picker"  [matDatepickerFilter]="fechaPermitida">
+        <small class="text-danger"
+               *ngIf="servicioFrom.get('fecha_agendamiento')?.touched && servicioFrom.get('fecha_agendamiento')?.errors?.['required']">
+          La fecha es requerida
+        </small>
       </div>
       <div class="calendar">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -30,9 +34,13 @@
       </div>
       <div class="form-group">
         <label for="hora_agendamiento">Hora:</label>
-        <select class="form-control" id="hora_agendamiento" name="hora_agendamiento" formControlName="hora_agendamiento" [(ngModel)]="horaAgendamiento" >
+        <select class="form-control" id="hora_agendamiento" name="hora_agendamiento" formControlName="hora_agendamiento" [(ngModel)]="horaAgendamiento">
           <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
         </select>
+        <small class="text-danger"
+               *ngIf="servicioFrom.get('hora_agendamiento')?.touched && servicioFrom.get('hora_agendamiento')?.errors?.['required']">
+          La hora es requerida
+        </small>
       </div>
       <div>
         <label for="servicio">Servicio:</label>
@@ -40,6 +48,10 @@
           [ngModelOptions]="{standalone: true}" (change)="buscarServicios()">
           <option *ngFor="let servicio of servicios" [ngValue]="servicio.nombre">{{ servicio.nombre }}</option>
         </select>
+        <small class="text-danger"
+               *ngIf="!servicioSeleccionado">
+          El servicio es requerido
+        </small>
       </div>
       
     </form>

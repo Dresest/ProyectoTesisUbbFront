@@ -15,25 +15,33 @@
   
       <!-- formulario para ingresar un agendamiento -->
       <form [formGroup]="servicioFrom" class="d-flex ">
-        <!-- Fecha -->
-        <div class="form-group mr-2">
-          <label for="fecha_agendamiento">Fecha:</label>
-          <input type="text" placeholder="1/1/202x" formControlName="fecha_agendamiento" class="form-control" matInput
-            [matDatepicker]="picker" [(ngModel)]="fechaAgendamiento" [matDatepickerFilter]="fechaPermitida">
-        </div>
-        <div class="calendar">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </div>
+          <!-- Fecha -->
+      <div class="form-group mr-2">
+        <label for="fecha_agendamiento">Fecha:</label>
+        <input type="text" placeholder="1/1/202x" formControlName="fecha_agendamiento" class="form-control" matInput
+          [matDatepicker]="picker"  [matDatepickerFilter]="fechaPermitida">
+        <small class="text-danger"
+               *ngIf="servicioFrom.get('fecha_agendamiento')?.touched && servicioFrom.get('fecha_agendamiento')?.errors?.['required']">
+          La fecha es requerida
+        </small>
+      </div>
+      <div class="calendar">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
         
 
 
-        <div class="form-group">
-          <label for="hora_agendamiento">Hora:</label>
-          <select class="form-control" id="hora_agendamiento" name="hora_agendamiento" formControlName="hora_agendamiento" [(ngModel)]="horaAgendamiento" >
-            <option *ngFor="let hora of horas"  [value]="hora">{{ hora }}</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label for="hora_agendamiento">Hora:</label>
+        <select class="form-control" id="hora_agendamiento" name="hora_agendamiento" formControlName="hora_agendamiento" [(ngModel)]="horaAgendamiento">
+          <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+        </select>
+        <small class="text-danger"
+               *ngIf="servicioFrom.get('hora_agendamiento')?.touched && servicioFrom.get('hora_agendamiento')?.errors?.['required']">
+          La hora es requerida
+        </small>
+      </div>
   
         <div class="form-group">
           <label for="estado">Estado:</label>
@@ -52,7 +60,8 @@
   
       </form>
       <div class=" d-flex justify-content-betwen">
-        <button class="btn btn-primary mr-2" (click)="guardarCambios()">Guardar</button>
+        <button class="btn btn-primary mr-2" (click)="guardarCambios()" [disabled]="!formularioCompleto">Guardar</button>
+
         <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
       </div>
     </div>

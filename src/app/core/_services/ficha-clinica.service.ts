@@ -12,7 +12,7 @@ export class FichaClinicaService {
   constructor(private http: HttpClient) { }
 
   agregarFicha(data: any): Observable<any> {
-    return this.http.post(`${this.base_url}/editarFichaClinica/`, data);
+    return this.http.post(`${this.base_url}/registrarFichaClinica`, data);
   }
   actualizarFicha(id_ficha: any, data: any): Observable<any> {
     return this.http.post(`${this.base_url}/editarFichaClinica/${id_ficha}`, data);

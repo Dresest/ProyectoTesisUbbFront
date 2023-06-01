@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AgendaService } from 'src/app/core/_services/agenda.service';
 import { AuthService } from 'src/app/core/_services/auth.service';
 import { PacienteService } from 'src/app/core/_services/paciente.service';
@@ -48,9 +48,9 @@ export class AgregarAgendaComponent implements OnInit {
     this.obtenerPacientes();
     this.obtenerServicios();
     this.servicioFrom = this.formBuilder.group({
-      fecha_agendamiento: new Date(),
-      hora_agendamiento: '',
-      servicio: ''
+      fecha_agendamiento: ['', Validators.required],
+      hora_agendamiento: ['', Validators.required],
+      servicio: ['', Validators.required]
     });
   }
 
@@ -92,7 +92,6 @@ export class AgregarAgendaComponent implements OnInit {
         respuesta => {
           if (respuesta.servicio) {
             this.idServicio = respuesta.servicio.id_servicio;
-           
           }
         },
         error => {
@@ -113,10 +112,12 @@ export class AgregarAgendaComponent implements OnInit {
       this.pacienteSeleccionado
     );
   }
+
   fechaPermitida = (d: Date | null): boolean => {
     const fechaActual = new Date();
     return !d || d >= fechaActual;
   }
+
   guardarCambios(): void {
     const nuevaAgenda = {
       fecha_agendamiento: this.servicioFrom.value.fecha_agendamiento.toISOString().substring(0, 10),

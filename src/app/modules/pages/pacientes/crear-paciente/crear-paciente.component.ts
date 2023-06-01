@@ -38,13 +38,23 @@ export class CrearPacienteComponent implements OnInit {
 
   }
   onRutInput(event: any) {
-    let rut = event.target.value.replace(/[^\d]/g, ''); // Eliminar todo excepto los dígitos
-    rut = rut.substring(0, rut.length - 1) + '-' + rut.substring(rut.length - 1); // Insertar guión antes del dígito verificador
-    rut = rut.replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1.'); // Agregar puntos de separación de miles
+    let rut = event.target.value.replace(/[^\d]/g, ''); 
+    rut = rut.substring(0, 12); 
+    rut = rut.substring(0, rut.length - 1) + '-' + rut.substring(rut.length - 1); 
+    rut = rut.replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1.'); 
     this.pacienteForm.patchValue({ rut: rut });
-  }
-  
- 
+}
+
+onEdadInput(event: any) {
+  let edad = event.target.value.replace(/[^\d]/g, ''); 
+  edad = edad.substring(0, 2);
+  this.pacienteForm.patchValue({ edad: edad });
+}
+onTelefonoInput(event: any) {
+  let telefono = event.target.value.replace(/[^\d]/g, ''); 
+  telefono = telefono.substring(0, 9);
+  this.pacienteForm.patchValue({ telefono: telefono });
+}
   
   
   

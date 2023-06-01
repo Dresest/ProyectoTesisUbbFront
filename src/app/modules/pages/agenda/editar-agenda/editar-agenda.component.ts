@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AgendaService } from 'src/app/core/_services/agenda.service';
 import { AuthService } from 'src/app/core/_services/auth.service';
@@ -34,6 +34,7 @@ private subscription!: Subscription;
   searchText: string = '';
   mostrarLista: boolean = false;
   estadoNumero:number =1;
+  formularioCompleto = false;
 
   estados: string[] = [
     'pendiente', 'cancelada', 'realizada',
@@ -64,14 +65,18 @@ private subscription!: Subscription;
     this.userInfo = this._authService.obtenerInformacionToken();
     this.obtenerPacientes();
     this.obtenerServicios();
-    
+  
     this.servicioFrom = this.formBuilder.group({
-      fecha_agendamiento: '',
-      hora_agendamiento: '',
-      servicio: '',
-      estado: ''
+      fecha_agendamiento: ['', Validators.required],
+      hora_agendamiento: ['', Validators.required],
+      servicio: [''],
+      estado: [''],
     });
-
+    this.servicioFrom.statusChanges.subscribe(() => {
+      this.verificarFormularioCompleto();
+    });
+    
+    
     this.obtenerAgenda();
   }
 
@@ -79,15 +84,17 @@ private subscription!: Subscription;
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+  verificarFormularioCompleto() {
+    this.formularioCompleto = this.servicioFrom.valid;
+  }
+  
+  
   obtenerAgenda(): void {
   
     this.agendaService.obtenerAgendaPorID(this.idAgendaSeleccionada).subscribe(respuesta => {
     this.agendaSeleccionada = respuesta.agenda;  
-
     this.nombrePaciente=this.agendaSeleccionada.paciente.nombre;
     this.servicioSeleccionado=this.agendaSeleccionada.servicio.nombre;
-    this.horaAgendamiento=this.agendaSeleccionada.hora_agendamiento;
-    this.fechaAgendamiento=this.agendaSeleccionada.fecha_agendamiento;
     this.estadoSeleccionado=this.agendaSeleccionada.estado.status;
 
 
@@ -168,8 +175,8 @@ private subscription!: Subscription;
     
     
     const nuevaAgenda = {
-      fecha_agendamiento: this.fechaAgendamiento.toISOString().substring(0, 10),
-      hora_agendamiento: this.horaAgendamiento,
+      fecha_agendamiento: this.servicioFrom.value.fecha_agendamiento.toISOString().substring(0, 10),
+      hora_agendamiento: this.servicioFrom.value.hora_agendamiento,
       id_paciente: this.pacienteSeleccionado,
       idProfesional: this.userInfo.id,
       idServicio: this.idServicio,
