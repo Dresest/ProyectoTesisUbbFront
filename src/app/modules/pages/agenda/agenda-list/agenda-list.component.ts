@@ -37,10 +37,13 @@ export class AgendaListComponent implements OnInit {
         this.agendas = respuesta.agendas;
   
         const fechaHoy = new Date();
-        fechaHoy.setHours(0, 0, 0, 0); 
-        
+        fechaHoy.setHours(0, 0, 0, 0);
+  
         this.agendas = this.agendas.filter(
-          (agenda) => new Date(agenda.fecha_agendamiento) >= fechaHoy
+          (agenda) => {
+            const fechaAgendamiento = new Date(agenda.fecha_agendamiento);
+            return fechaAgendamiento.toDateString() === fechaHoy.toDateString();
+          }
         );
   
         this.agendas.sort((a, b) => {

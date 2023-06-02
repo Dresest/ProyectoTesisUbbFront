@@ -1,3 +1,19 @@
-.ficha{
-    background-color:aliceblue;
-}
+.ficha {
+    background-color: #c2e7e1;
+  }
+  
+.btn-primary {
+    background-color: #7FBBB2;
+  }
+
+  .encabezado-columna {
+    background-color: #7ddfcd;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #faffff;
+  }
+  
+  .table-striped tbody tr:nth-of-type(even) {
+    background-color: #dbf6f1;
+  }

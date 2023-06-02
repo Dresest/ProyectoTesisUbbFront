@@ -1,18 +1,16 @@
 <div class="row">
   <!-- LISTADO DE FICHAS CLINICAS -->
-  <div class="col-md-5">
-    <div class="card mt-3" *ngIf="fichasClinicas">
-      <div class="card-header">
-        <h4 class="card-title">Listado de Fichas clínicas</h4>
-      </div>
-      <div class="card-body">
+  <div class="col-md-5"*ngIf="fichasClinicas">
+ 
+      
+   
         <div class="table-responsive">
           <table class="table table-hover table-striped custom-table">
             <thead>
               <tr>
-                <th>Ficha N°</th>
-                <th>Fecha de Creación</th>
-                <th></th>
+                <th class="encabezado-columna">Ficha N°</th>
+                <th class="encabezado-columna">Fecha de Creación</th>
+                <th class="encabezado-columna"></th>
               </tr>
             </thead>
             <tbody>
@@ -33,16 +31,16 @@
               </tr>
             </tbody>
           </table>
-        </div>
+      
       </div>
       <div class="card-footer">
         <div class="pagination-container">
-          <button class="btn btn-secondary" (click)="irPaginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
+          <button class="btn btn-primary" (click)="irPaginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
           <span class="page-number">{{ paginaActual }}</span>
-          <button class="btn btn-secondary" (click)="irPaginaSiguiente()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+          <button class="btn btn-primary" (click)="irPaginaSiguiente()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
         </div>
       </div>
-    </div>
+ 
   </div>
   
   

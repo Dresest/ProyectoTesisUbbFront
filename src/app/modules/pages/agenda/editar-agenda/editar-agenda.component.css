@@ -6,3 +6,26 @@
     margin-top: 30px;
     margin-left: -18px; 
 }  
+.custom-btn {
+  background-color: #E2F2EF;
+  color: #000000;
+  border-color: #E2F2EF;
+}
+
+.custom-btn:hover {
+  background-color: #C3DFE3;
+  border-color: #C3DFE3;
+}
+
+.custom-btn:active {
+  background-color: #7FBBB2;
+  border-color: #7FBBB2;
+}
+
+.custom-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(127, 187, 178, 0.5);
+}
+
+.btn-primary {
+  background-color: #7FBBB2;
+}

@@ -1,13 +1,11 @@
 <div class="table-responsive mt-3" *ngIf="agendas.length > 0">
-
   <div class="card col-md-12" *ngIf="mostrarEditarAgenda">
-  <app-editar-agenda (cambiosRealizados)="actualizarAgendas()"></app-editar-agenda>
-</div>
+    <app-editar-agenda (cambiosRealizados)="actualizarAgendas()"></app-editar-agenda>
+  </div>
 
-  <table class="table table-striped">
+  <table class="table table-striped" >
     <thead>
       <tr>
-      
         <th class="encabezado-columna">
           <button class="btn btn-link" (click)="ordenarPorPaciente()">
             Paciente
@@ -50,8 +48,7 @@
             <span *ngIf="!ordenAscendente">▲</span>
           </button>
         </th>
-        
-        <th>Acciones</th>
+        <th class="encabezado-columna">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -66,12 +63,11 @@
           <div class="d-inline-block">
             <button class="btn btn-primary" (click)="mostrarComponenteEditarAgenda(agenda.id_agenda)">Editar</button>
           </div>
-          
         </td>
       </tr>
     </tbody>
   </table>
-  
+
   <div class="d-flex justify-content-between mb-3">
     <p class="mb-0">{{ obtenerTextoPaginacion() }}</p>
     <div>
@@ -79,5 +75,4 @@
       <button class="btn btn-primary ms-3" (click)="cambiarPagina(5)" [disabled]="inicio >= agendas.length - 5">Siguiente</button>
     </div>
   </div>
-  
 </div>

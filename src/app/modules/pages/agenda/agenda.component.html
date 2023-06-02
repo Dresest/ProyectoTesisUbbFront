@@ -6,7 +6,6 @@
   <app-editar-agenda (cambiosRealizados)="actualizarAgendas()"></app-editar-agenda>
 </div>
 
-
 <div class="card">
   <div class="card-body">
     <div class="container">
@@ -15,8 +14,7 @@
         <div class="col-md-12 d-flex align-items-center">
           <div class="form-group mr-2">
             <h4>Buscar agendas por rut:</h4>
-            <input type="text" id="rutBuscado" placeholder="Ingresar rut" [(ngModel)]="rutBuscado"
-              class="form-control" />
+            <input type="text" id="rutBuscado" placeholder="Ingresar rut" [(ngModel)]="rutBuscado" class="form-control" />
           </div>
           <div class="botones">
             <button class="btn btn-primary" (click)="buscarAgendas()">Buscar</button>
@@ -27,11 +25,8 @@
         </div>
       </div>
 
-
-
       <div class="table-responsive mt-3" *ngIf="agendas">
         <table class="table table-hover table-striped custom-table">
-
           <thead>
             <tr>
               <th class="encabezado-columna">
@@ -76,45 +71,32 @@
                   <span *ngIf="!ordenAscendente">▲</span>
                 </button>
               </th> 
-              <th>Acciones</th>
+              <th class="encabezado-columna">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="let agenda of agendas.slice((paginaActual - 1) * numAgendasPorPagina, paginaActual * numAgendasPorPagina)">
-              <td style="text-align: left; vertical-align: middle;">{{ agenda.paciente.nombre }} {{
-                agenda.paciente.apellido }}</td>
+            <tr *ngFor="let agenda of agendas.slice((paginaActual - 1) * numAgendasPorPagina, paginaActual * numAgendasPorPagina)">
+              <td style="text-align: left; vertical-align: middle;">{{ agenda.paciente.nombre }} {{ agenda.paciente.apellido }}</td>
               <td style="text-align: left; vertical-align: middle;">{{ agenda.paciente.rut }}</td>
-              <td style="text-align: left; vertical-align: middle;">{{ agenda.fecha_agendamiento | date: 'dd/MM/yyyy' }}
-              </td>
-              <td style="text-align: left; vertical-align: middle;"> {{ agenda.hora_agendamiento | hora | date: 'H:mm'
-                }}</td>
+              <td style="text-align: left; vertical-align: middle;">{{ agenda.fecha_agendamiento | date: 'dd/MM/yyyy' }}</td>
+              <td style="text-align: left; vertical-align: middle;">{{ agenda.hora_agendamiento | hora | date: 'H:mm' }}</td>
               <td style="text-align: left; vertical-align: middle;">{{ agenda.servicio.nombre }}</td>
               <td style="text-align: left; vertical-align: middle;">{{ agenda.estado.status }}</td>
               <td class="text-center">
                 <div class="d-inline-block">
-                  <button class="btn btn-primary"
-                    (click)="mostrarComponenteEditarAgenda(agenda.id_agenda)">Editar</button>
+                  <button class="btn btn-primary" (click)="mostrarComponenteEditarAgenda(agenda.id_agenda)">Editar</button>
                 </div>
-
               </td>
-
             </tr>
-
-
-
           </tbody>
         </table>
       </div>
 
-
       <div class="d-flex justify-content-between align-items-center mt-3">
         <p class="mb-0">{{ obtenerTextoPaginacion() }}</p>
         <div>
-          <button class="btn btn-primary mr-2" [disabled]="paginaActual === 1"
-            (click)="paginaActual = paginaActual - 1">Anterior</button>
-          <button class="btn btn-primary" [disabled]="paginaActual * numAgendasPorPagina >= agendas.length"
-            (click)="paginaActual = paginaActual + 1">Siguiente</button>
+          <button class="btn btn-primary mr-2" [disabled]="paginaActual === 1" (click)="paginaActual = paginaActual - 1">Anterior</button>
+          <button class="btn btn-primary" [disabled]="paginaActual * numAgendasPorPagina >= agendas.length" (click)="paginaActual = paginaActual + 1">Siguiente</button>
         </div>
       </div>
 

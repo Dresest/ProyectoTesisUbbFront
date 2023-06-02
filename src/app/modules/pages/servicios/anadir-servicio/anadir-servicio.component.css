@@ -2,4 +2,6 @@
     max-height: 100px; 
     overflow: auto; 
   }
-  
+  .btn-primary {
+    background-color: #7FBBB2;
+  }
