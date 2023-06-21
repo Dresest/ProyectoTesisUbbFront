@@ -1,58 +1,235 @@
-<div class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-12">
-          <h4>Datos personales</h4>
-          <form [formGroup]="profesionalForm">
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="nombre" class="mr-2">Nombre:</label >
-                <input type="text" formControlName="nombre" class="form-control mr-2" [readonly]="mostrarInformacion">
-                <label for="apellido" class="mr-2">Apellido:</label >
-                <input type="text" formControlName="apellido" class="form-control" [readonly]="mostrarInformacion">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="direccion" class="mr-2">Dirección:</label >
-                <input type="text" formControlName="direccion" class="form-control mr-2" [readonly]="mostrarInformacion">
-                <label for="telefono" class="mr-2">Teléfono:</label >
-                <input type="text" formControlName="telefono" class="form-control" [readonly]="mostrarInformacion">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="email" class="mr-2">Email:</label >
-              <input type="text" formControlName="email" class="form-control" [readonly]="mostrarInformacion">
-            </div>
-          </form>
-          <button class="btn btn-primary mt-2" *ngIf="mostrarInformacion" (click)="toggleInformacion()">Editar</button>
-          <button class="btn btn-primary mr-2" *ngIf="!mostrarInformacion" (click)="guardarCambios()">Guardar</button>
-          <button class="btn btn-secondary" *ngIf="!mostrarInformacion" (click)="cancelarEdicion()">Cancelar</button>
+<div class="modal fade" id="agregarProf" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar profesional</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" class="form-control" id="email" formControlName="email"
+                  required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+              <small class="text-danger"
+                  *ngIf="emailForm.get('email')?.touched && emailForm.get('email')?.errors?.['required']">
+                  El correo electrónico es requerido
+              </small>
+          </div>
+
+      </form>  </div>
+      <div class="col-12">
+        <div class="modal-footer d-flex justify-content-end">
+          <button class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelarEdicion()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="emailForm.invalid" (click)="invitar()">Enviar</button>
         </div>
       </div>
     </div>
   </div>
-  
-  
-<div class="row">
-    <div class="col-4">
-        <div class="card">
-            <div class="card-body">
-                <h3>Seleccione el tema</h3>
-                <div class="r-panel-body">
-                    <ul id="themecolors" class="m-t-20">
-                        <!-- working -->
-                        <li><b>Con el sidebar claro</b></li>
-                        <li><a (click)="changeTheme('default')" data-theme="default" class="selector default-theme working">1</a></li>
-                        <li><a (click)="changeTheme('green')" data-theme="green" class="selector green-theme">2</a></li>
-                        <li><a (click)="changeTheme('red')" data-theme="red" class="selector red-theme">3</a></li>
-                        <li><a (click)="changeTheme('blue')" data-theme="blue" class="selector blue-theme ">4</a></li>
-                        <li><a (click)="changeTheme('purple')" data-theme="purple" class="selector purple-theme">5</a></li>
-                        <li><a (click)="changeTheme('megna')" data-theme="megna" class="selector megna-theme">6</a></li>
-
-                    </ul>
-                
-                </div>
-            </div>
-        </div>
-        
-    </div>
 </div>
+
+
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12">
+        <h4>Datos personales</h4>
+        <form [formGroup]="profesionalForm">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="nombre" class="mr-2">Nombre:</label>
+              <input type="text" formControlName="nombre" required class="form-control mr-2"
+                [readonly]="mostrarInformacion">
+              <small class="text-danger"
+                *ngIf="profesionalForm.get('nombre')?.touched && profesionalForm.get('nombre')?.errors?.['required']">
+                El nombre es requerido
+              </small>
+              <label for="apellido" class="mr-2">Apellido:</label>
+              <input type="text" formControlName="apellido" required class="form-control"
+                [readonly]="mostrarInformacion">
+              <small class="text-danger"
+                *ngIf="profesionalForm.get('apellido')?.touched && profesionalForm.get('apellido')?.errors?.['required']">
+                El apellido es requerido
+              </small>
+              <label for="rut" class="mr-2">Rut:</label>
+              <input type="text" placeholder="11.111.111-1" formControlName="rut" class="form-control" minlength="11"
+                maxlength="12" (input)="onRutInput($event)" [readonly]="mostrarInformacion">
+              <small class="text-danger"
+                *ngIf="profesionalForm.get('rut')?.touched && profesionalForm.get('rut')?.errors?.['required']">
+                El rut es requerido
+              </small>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="direccion" class="mr-2">Dirección:</label>
+              <input type="text" formControlName="direccion" required class="form-control mr-2"
+                [readonly]="mostrarInformacion">
+              <small class="text-danger"
+                *ngIf="profesionalForm.get('direccion')?.touched && profesionalForm.get('direccion')?.errors?.['required']">
+                La dirección es requerida
+              </small>
+              <label for="telefono" class="mr-2">Teléfono:</label>
+              <input type="text" (input)="onTelefonoInput($event)" placeholder="+569 xxxxxxxx"
+                formControlName="telefono" required class="form-control" [readonly]="mostrarInformacion">
+              <small class="text-danger"
+                *ngIf="profesionalForm.get('telefono')?.touched && profesionalForm.get('telefono')?.errors?.['required']">
+                El teléfono es requerido
+              </small>
+              <label for="email" class="mr-2">Email:</label>
+              <input type="text" formControlName="email" placeholder="example@email.com" required class="form-control"
+                [readonly]="mostrarInformacion">
+              <small class="text-danger"
+                *ngIf="profesionalForm.get('email')?.touched && profesionalForm.get('email')?.errors?.['required']">
+                El email es requerido
+              </small>
+            </div>
+          </div>
+          <div class="form-group col-md-6" *ngIf="cambiarpass">
+            <form class="mb-4" (ngSubmit)="onSubmit()" [formGroup]="passwordForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="newpass">Contraseña</label>
+                    <input type="password" class="form-control" id="newpass" formControlName="newpass">
+                    <span toggle class="password-toggle"></span>
+                    <small class="text-danger"
+                      *ngIf="passwordForm.get('newpass')?.touched && passwordForm.get('newpass')?.errors?.['required']">
+                      La contraseña es requerida
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="password_confirm">Confirmar contraseña</label>
+                    <input type="password" class="form-control" id="password_confirm"
+                      formControlName="password_confirm">
+                    <span toggle class="password-toggle"></span>
+                    <small class="text-danger"
+                      *ngIf="passwordForm.get('password_confirm')?.touched && passwordForm.hasError('notSame')">
+                      Las contraseñas no son iguales
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="d-flex">
+                    <button type="submit" class="btn btn-primary mr-2" [disabled]="passwordForm.invalid"
+                      (click)="nuevapass()">
+                      Confirmar nueva contraseña
+                    </button>
+                    <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </form>
+        <button class="btn btn-primary mt-2" *ngIf="mostrarInformacion" (click)="toggleInformacion()">Editar</button>
+        <button class="btn btn-primary mr-2" *ngIf="!cambiarpass&&!mostrarInformacion" (click)="cambiarContrasena()">
+          Cambiar contraseña
+        </button>
+        <button class="btn btn-primary mr-2" [disabled]="!profesionalForm.valid"
+          *ngIf="!cambiarpass&&!mostrarInformacion" (click)="guardarCambios()">Guardar</button>
+        <button class="btn btn-secondary" *ngIf="!cambiarpass&&!mostrarInformacion"
+          (click)="cancelarEdicion()">Cancelar</button>
+
+
+      </div >
+      <div class="col-12">
+       
+
+        
+      </div>
+      <div class="col-12" *ngIf="idCorrecto">
+        <div class="d-flex align-items-center justify-content-between">
+          <h4>Lista de profesionales</h4>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarProf">Agregar profesional</button>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="encabezado-columna">
+                <button class="btn btn-link"   (click)="ordenarPorNombre()">
+                  nombre
+                  <span *ngIf="ordenAscendenteP">▼</span>
+                  <span *ngIf="!ordenAscendenteP">▲</span>
+                </button>
+              </th>
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorRut()">
+                  Rut
+                  <span *ngIf="ordenAscendenteRut">▼</span>
+                  <span *ngIf="!ordenAscendenteRut">▲</span>
+                </button>
+              </th>
+              
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorDireccion()">
+                  Dirección
+                  <span *ngIf="ordenAscendenteDireccion">▼</span>
+                  <span *ngIf="!ordenAscendenteDireccion">▲</span>
+                </button>
+              </th>
+              
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorTelefono()">
+                  Teléfono
+                  <span *ngIf="ordenAscendenteTelefono">▼</span>
+                  <span *ngIf="!ordenAscendenteTelefono">▲</span>
+                </button>
+              </th>
+              
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorEmail()">
+                  Email
+                  <span *ngIf="ordenAscendenteEmail">▼</span>
+                  <span *ngIf="!ordenAscendenteEmail">▲</span>
+                </button>
+              </th>
+              
+              <th class="encabezado-columna">
+                <button class="btn btn-link" (click)="ordenarPorEstado()">
+                  Estado
+                  <span *ngIf="ordenAscendenteEstado">▼</span>
+                  <span *ngIf="!ordenAscendenteEstado">▲</span>
+                </button>
+              </th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let profesional of profesionales | slice:inicio:(inicio + 5)">
+              <td style="text-align: left; vertical-align: middle;">{{ profesional.nombre }} {{ profesional.apellido }}</td>
+              <td style="text-align: left; vertical-align: middle;">{{ profesional.rut }}</td>
+              <td style="text-align: left; vertical-align: middle;">{{ profesional.direccion }}</td>
+              <td style="text-align: left; vertical-align: middle;">{{ profesional.telefono }}</td>
+              <td style="text-align: left; vertical-align: middle;">{{ profesional.email }}</td>
+          
+              <td class="text-center">
+                <div class="d-inline-block">
+                  <ng-container *ngIf="profesional.is_activo; else inactiveButton">
+                    <button class="btn btn-primary" (click)="desactivarProfesional(profesional)">Desactivar</button>
+                  </ng-container>
+                  <ng-template #inactiveButton>
+                    <button class="btn btn-primary" (click)="activarProfesional(profesional)">Activar</button>
+                  </ng-template>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          
+        </table>
+        <div class="d-flex justify-content-between mb-3">
+          <p class="mb-0">{{ obtenerTextoPaginacion() }}</p>
+          <div>
+            <button class="btn btn-primary" (click)="cambiarPagina(-5)" [disabled]="inicio === 0">Anterior</button>
+            <button class="btn btn-primary ms-3" (click)="cambiarPagina(5)" [disabled]="inicio >= profesionales.length - 5">Siguiente</button>
+          </div>
+        </div>
+      </div>
+
+       
+
+      
+
+    </div>

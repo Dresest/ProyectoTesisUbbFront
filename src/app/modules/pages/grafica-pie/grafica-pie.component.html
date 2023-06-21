@@ -1,9 +1,28 @@
-<canvas baseChart class="chart"
-        [data]="pieChartData"
-        [type]="pieChartType"
-        [options]="pieChartOptions"
-        [plugins]="pieChartPlugins">
-</canvas>
+<div class="card">
+        <div class="card-body">
+          <h1 class="card-title">Reportes</h1>
+          <button class="btn btn-primary btn-sm" style="position: absolute; top: 10px; right: 10px;" (click)="pdf()">Descargar</button>
+      
+          <div class="container" id="Reportes">
+            <!-- Resto del contenido de la tarjeta --><div class="row">
+              <div class="col-md-8">
+                <h4 class="card-title">Resumen de agenda anual</h4>
+                <canvas baseChart class="chart" [data]="barChartData" [labels]="barChartLabels"
+                  [options]="barChartOptions" [type]="barChartType" [plugins]="barChartPlugins"></canvas>
+              </div>
+              <div class="col-md-4">
+                <h4 class="card-title">Comparativa agendas manuales y online</h4>
+                <div class="row">
+                  <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType"
+                    [options]="pieChartOptions" [plugins]="pieChartPlugins"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <mat-divider style="margin: 1em 0;"></mat-divider>
+        </div>
+      </div>
+      
 
-<mat-divider style="margin: 1em 0;"></mat-divider>
-
+      

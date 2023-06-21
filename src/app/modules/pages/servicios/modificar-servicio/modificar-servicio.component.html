@@ -18,7 +18,7 @@
         <div class="form-group mr-2">
           <label for="costo">Precio:</label>
           <input type="text" style="width: 100px;" formControlName="costo" class="form-control"
-            [readonly]="mostrarInformacion" [value]="servicioFrom.controls['costo'].value |formatoCosto">
+            [readonly]="mostrarInformacion" [value]="servicioFrom.controls['costo'].value ">
 
 
         </div>
@@ -29,8 +29,8 @@
       <button class="btn btn-primary mt-2" *ngIf="mostrarInformacion" (click)="toggleInformacion()">Editar</button>
 
       
-        <button class="btn btn-primary mr-2" *ngIf="!mostrarInformacion" (click)="guardarCambios()">Guardar</button>
-        <button class="btn btn-secondary" *ngIf="!mostrarInformacion" (click)="cancelarEdicion()">Cancelar</button>
+        <button class="btn btn-primary mr-2" *ngIf="!mostrarInformacion" data-bs-dismiss="modal" (click)="guardarCambios()">Guardar</button>
+        <button class="btn btn-secondary" *ngIf="!mostrarInformacion" data-bs-dismiss="modal" (click)="cancelarEdicion()">Cancelar</button>
    
     </div>
   </div>

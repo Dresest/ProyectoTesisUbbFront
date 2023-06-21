@@ -91,6 +91,7 @@ export class ModificarServicioComponent implements OnInit {
 
   guardarCambios(): void {
     this.mostrarInformacion = true;
+    
     const datosFormulario = this.servicioFrom.value;
     const hayCambios = JSON.stringify(this.informacionOriginal) !== JSON.stringify(datosFormulario);
     if (hayCambios) {

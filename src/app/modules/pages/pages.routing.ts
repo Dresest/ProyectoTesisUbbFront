@@ -11,8 +11,14 @@ import { PacientesComponent } from './pacientes/pacientes.component';
 
 import { FichaClinicaComponent } from './ficha-clinica/ficha-clinica.component';
 import { CrearPacienteComponent } from './pacientes/crear-paciente/crear-paciente.component';
+import { LandPageComponent } from './land-page/land-page.component';
+import { ReporteComponent } from './reportes/reporte/reporte.component';
 
 const routes: Routes = [
+  {
+    path: 'centrokine',
+    component: LandPageComponent,
+  },
   {
     path: '',
     component: PagesComponent,
@@ -61,6 +67,13 @@ const routes: Routes = [
         component: FichaClinicaComponent,
         canActivate: [AuthGuard],
         data: { titulo: 'fichaClinica' }
+        
+      },
+      {
+        path: 'reporte',
+        component: ReporteComponent,
+        canActivate: [AuthGuard],
+        data: { titulo: 'reporte' }
         
       },
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },

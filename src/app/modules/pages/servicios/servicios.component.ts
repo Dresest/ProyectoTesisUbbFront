@@ -1,8 +1,9 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit ,Renderer2} from '@angular/core';
 import { AuthService } from 'src/app/core/_services/auth.service';
 import { servicioService } from 'src/app/core/_services/servicio-profesional.service';
 import { DecimalPipe } from '@angular/common';
 import { FormatoCostoPipe } from '../../../core/_pipes/formatoMoneda.pipe';
+
 
 @Component({
   selector: 'app-servicios',
@@ -27,7 +28,8 @@ export class ServiciosComponent implements OnInit {
 
   constructor(
     private _servicioService: servicioService,
-    private _authService: AuthService,
+    private _authService: AuthService, 
+     private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -86,7 +88,8 @@ export class ServiciosComponent implements OnInit {
   }
   
   actualizarServicios(): void {
-    this.obtenerServicios();
+    this.ngOnInit();
+    this.obtenerServicios()
   }
   
 }

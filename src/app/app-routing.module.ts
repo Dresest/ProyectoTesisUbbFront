@@ -8,12 +8,18 @@ import { AuthGuard } from './core/_guards/auth/auth.guard';
 import { PagesRoutingModule } from './modules/pages/pages.routing';
 import { NuevaPasswordComponent } from './modules/pages/nueva-password/nueva-password.component';
 import { RecuperarComponent } from './modules/pages/recuperar/recuperar.component';
+import { LandPageComponent } from './modules/pages/land-page/land-page.component';
+import { RegistroComponent } from './modules/pages/registro/registro.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [NotLoggedInGuard] },
   { path: 'recuperar', component: RecuperarComponent },
+  { path: 'registro', component: RegistroComponent },
   {path: 'nueva-password/:token', component: NuevaPasswordComponent,data: { titulo: 'Nueva Password' }},
   { path: '**', component: NopagefoundComponent },
+  { path: 'centrokine', component: LandPageComponent },
+
 
 ];
 

@@ -11,6 +11,9 @@ export class FichaClinicaService {
 
   constructor(private http: HttpClient) { }
 
+  getAllDiagnoscito(): Observable<any> {
+    return this.http.get(`${this.base_url}/getAllDiagnoscito`);
+  }
   agregarFicha(data: any): Observable<any> {
     return this.http.post(`${this.base_url}/registrarFichaClinica`, data);
   }
@@ -23,5 +26,7 @@ export class FichaClinicaService {
   fichaByID(id_ficha: any): Observable<any> {
     return this.http.get(`${this.base_url}/getFichaClinicaById/${id_ficha}`);
   }
+
+
   
 }

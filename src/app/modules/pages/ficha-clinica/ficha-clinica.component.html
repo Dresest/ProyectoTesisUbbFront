@@ -1,105 +1,205 @@
 <div class="row">
   <!-- LISTADO DE FICHAS CLINICAS -->
-  <div class="col-md-5"*ngIf="fichasClinicas">
- 
-      
-   
-        <div class="table-responsive">
-          <table class="table table-hover table-striped custom-table">
-            <thead>
-              <tr>
-                <th class="encabezado-columna">Ficha N°</th>
-                <th class="encabezado-columna">Fecha de Creación</th>
-                <th class="encabezado-columna"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let ficha of fichasClinicasPaginadas">
-                <td>
-                  <a class="table-link" (click)="mostrarDetallesFicha(ficha.id_ficha)">
-                    {{ ficha.id_ficha }}
-                  </a>
-                </td>
-                <td>
-                  <a class="table-link" (click)="mostrarDetallesFicha(ficha.id_ficha)">
-                    {{ ficha.fecha_creacion | date: 'dd/MM/yyyy' }}
-                  </a>
-                </td>
-                <td>
-                  <button class="btn btn-primary" (click)="mostrarDetallesFicha(ficha.id_ficha)">Editar</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-      
+  <div class="col-md-5" *ngIf="fichasClinicas">
+    <div class="table-responsive">
+      <table class="table table-hover table-striped custom-table">
+        <thead>
+          <tr>
+            <th class="encabezado-columna">Ficha N°</th>
+            <th class="encabezado-columna">Fecha de Creación</th>
+            <th class="encabezado-columna"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ficha of fichasClinicasPaginadas">
+            <td>
+              <a class="table-link" (click)="mostrarDetallesFicha(ficha.id_ficha)">
+                {{ ficha.id_ficha }}
+              </a>
+            </td>
+            <td>
+              <a class="table-link" (click)="mostrarDetallesFicha(ficha.id_ficha)">
+                {{ ficha.fecha_creacion | date: 'dd/MM/yyyy' }}
+              </a>
+            </td>
+            <td>
+              <button class="btn btn-primary" (click)="mostrarDetallesFicha(ficha.id_ficha)"><span
+                  class="mdi mdi-magnify"></span></button>
+                  <button class="btn btn-primary" (click)="EditarDetallesFicha(ficha.id_ficha)"
+                  [disabled]="diferenciaHoras(ficha.fecha_creacion) > 48">
+                  <span class="mdi mdi-pencil"></span>
+                </button>
+                
+              <button class="btn btn-primary" (click)="pdf(ficha.id_ficha)"><span
+                  class="mdi mdi-file-pdf-box"></span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="card-footer">
+      <div class="pagination-container">
+        <button class="btn btn-primary" (click)="irPaginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
+        <span class="page-number">{{ paginaActual }}</span>
+        <button class="btn btn-primary" (click)="irPaginaSiguiente()"
+          [disabled]="paginaActual === totalPaginas">Siguiente</button>
       </div>
-      <div class="card-footer">
-        <div class="pagination-container">
-          <button class="btn btn-primary" (click)="irPaginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
-          <span class="page-number">{{ paginaActual }}</span>
-          <button class="btn btn-primary" (click)="irPaginaSiguiente()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
-        </div>
-      </div>
- 
+    </div>
+
   </div>
-  
-  
-  
-  
-  
-    <div class="card col-md-7 ficha">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-12">
-            <h4>Ficha clínica</h4>
-            <form [formGroup]="fichaClinicaForm">
-              <div class="form-group">
-                <label for="motivo_consulta">Motivo de consulta:</label>
-                <textarea formControlName="motivo_consulta" class="form-control" rows="3" [readonly]="mostrarInformacion"></textarea>
-                <small class="text-danger"
-                       *ngIf="fichaClinicaForm.get('motivo_consulta')?.touched && fichaClinicaForm.get('motivo_consulta')?.errors?.['required']">
-                  El motivo de consulta es requerido
-                </small>
-              </div>
-              <div class="form-group">
-                <label for="examen_fisico">Examen físico:</label>
-                <textarea formControlName="examen_fisico" class="form-control" rows="3" [readonly]="mostrarInformacion"></textarea>
-                <small class="text-danger"
-                       *ngIf="fichaClinicaForm.get('examen_fisico')?.touched && fichaClinicaForm.get('examen_fisico')?.errors?.['required']">
-                  El examen físico es requerido
-                </small>
-              </div>
-              <div class="form-group">
-                <label for="intervencion">Intervención:</label>
-                <textarea formControlName="intervencion" class="form-control" rows="3" [readonly]="mostrarInformacion"></textarea>
-                <small class="text-danger"
-                       *ngIf="fichaClinicaForm.get('intervencion')?.touched && fichaClinicaForm.get('intervencion')?.errors?.['required']">
-                  La intervención es requerida
-                </small>
-              </div>
-              <div class="form-group">
-                <label for="indicaciones">Indicación:</label>
-                <textarea formControlName="indicaciones" class="form-control" rows="3" [readonly]="mostrarInformacion"></textarea>
-                <small class="text-danger"
-                       *ngIf="fichaClinicaForm.get('indicaciones')?.touched && fichaClinicaForm.get('indicaciones')?.errors?.['required']">
-                  Las indicaciones son requeridas
-                </small>
-              </div>
-            </form>
-            
+  <div class="card col-md-7 ficha">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <h4>Ficha clínica</h4>
+          <form [formGroup]="fichaClinicaForm">
+            <div class="form-group">
+              <label for="motivo_consulta">Motivo de consulta:</label>
+              <textarea formControlName="motivo_consulta"  [readonly]="mostrarInformacion" class="form-control" rows="3"></textarea>
+              <small class="text-danger"
+                *ngIf="!mostrarInformacion && fichaClinicaForm.get('motivo_consulta')?.touched && fichaClinicaForm.get('motivo_consulta')?.errors?.['required']">
+                El motivo de consulta es requerido
+              </small>
+            </div>
 
-            <button class="btn btn-primary mt-2" *ngIf="agregarBtn" (click)="mostrarBtn()">Agregar</button>
-            
-            <button class="btn btn-primary mr-2" *ngIf="!agregandoFicha && !mostrarInformacion" (click)="guardarCambios()">Guardar</button>
-            <button class="btn btn-secondary" *ngIf="!agregandoFicha && !mostrarInformacion" (click)="cancelarEdicion()">Cancelar</button>
-            <button class="btn btn-primary mr-2" *ngIf="agregandoFicha" [disabled]="!fichaClinicaForm.valid" (click)="agregarFicha()">Guardar Ficha</button>
+            <div class="form-group">
+              <label for="examen_fisico">Examen físico:</label>
+              <textarea formControlName="examen_fisico" [readonly]="mostrarInformacion" class="form-control" rows="3"></textarea>
+              <small class="text-danger"
+                *ngIf="!mostrarInformacion && fichaClinicaForm.get('examen_fisico')?.touched && fichaClinicaForm.get('examen_fisico')?.errors?.['required']">
+                El examen físico es requerido
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="intervencion">Intervención:</label>
+              <textarea formControlName="intervencion"  [readonly]="mostrarInformacion" class="form-control" rows="3"></textarea>
+              <small class="text-danger"
+                *ngIf="!mostrarInformacion && fichaClinicaForm.get('intervencion')?.touched && fichaClinicaForm.get('intervencion')?.errors?.['required']">
+                La intervención es requerida
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="indicaciones">Indicación:</label>
+              <textarea formControlName="indicaciones" [readonly]="mostrarInformacion" class="form-control" rows="3"></textarea>
+              <small class="text-danger"
+                *ngIf="!mostrarInformacion && fichaClinicaForm.get('indicaciones')?.touched && fichaClinicaForm.get('indicaciones')?.errors?.['required']">
+                Las indicaciones son requeridas
+              </small>
+            </div>
+          </form>
 
-            <button class="btn btn-secondary" *ngIf="agregandoFicha" (click)="cancelarEdicionF()">Cancelar Ficha</button>
-          </div>
+          <button class="btn btn-primary mt-2" *ngIf="agregarBtn" (click)="mostrarBtn()">Agregar</button>
+
+          <button class="btn btn-primary mr-2" *ngIf="!agregandoFicha && !mostrarInformacion"
+            (click)="guardarCambios()">Guardar</button>
+          <button class="btn btn-secondary" *ngIf="!agregandoFicha && !mostrarInformacion"
+            (click)="cancelarEdicion()">Cancelar</button>
+          <button class="btn btn-primary mr-2" *ngIf="agregandoFicha" [disabled]="!fichaClinicaForm.valid"
+            (click)="agregarFicha()">Guardar Ficha</button>
+
+          <button class="btn btn-secondary" *ngIf="agregandoFicha" (click)="cancelarEdicionF()">Cancelar Ficha</button>
         </div>
       </div>
     </div>
-    
   </div>
+</div>
+
+<!-- PDF GENERADO -->
+<div *ngIf="mostrarPdf" id="fichaClinica" class="col-12 container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h4>Ficha clínica</h4>
+      <!-- Datos profesional -->
+      <div class="datos-profesional">
+        <p><em><strong>Profesional:</strong> {{ profesionalNombre }}</em></p>
+      </div>
+      <div class="datos-profesional">
+        <p><em><strong>Fecha:</strong> {{ fechaCreacion }}</em></p>
+      </div>
+      <div class="datos-profesional">
+        <p><em><strong>Datos del paciente:</strong></em></p>
+      </div>
+      <!-- Datos paciente -->
+      <form [formGroup]="pacienteForm">
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="nombre" class="mr-2">Nombre:</label>
+            <input type="text" formControlName="nombre" class="form-control">
+
+            <label for="alergias" class="mr-2">Alergias:</label>
+            <input type="text" formControlName="alergias" class="form-control">
+
+          </div>
+          <div class="form-group col-md-2">
+            <label for="apellido" class="mr-2">Apellido:</label>
+            <input type="text" formControlName="apellido" class="form-control">
+
+            <label for="telefono" class="mr-2">Teléfono:</label>
+            <input type="text" formControlName="telefono" class="form-control">
+          </div>
+
+          <div class="form-group col-md-2">
+            <label for="prevencion" class="mr-2">Prevencion:</label>
+            <input type="text" formControlName="prevencion" class="form-control">
+            <label for="direccion" class="mr-2">Dirección:</label>
+            <input type="text" formControlName="direccion" class="form-control">
+
+          </div>
+
+          <div class="form-group col-md-2">
+            <label for="rut" class="mr-2">Rut:</label>
+            <input type="text" formControlName="rut" class="form-control">
+            <label for="edad" class="mr-2">Edad:</label>
+            <input type="text" formControlName="edad" class="form-control">
+
+          </div>
+          <div class="form-group col-md-4">
+            <label for="email" class="mr-2">Email:</label>
+            <input type="text" formControlName="email" class="form-control">
+
+          </div>
+        </div>
+      </form>
+      <!-- Datos ficha -->
+      <form [formGroup]="fichaClinicaForm">
+        <div class="form-group">
+          <label for="motivo_consulta">Motivo de consulta:</label>
+          <textarea formControlName="motivo_consulta" class="form-control" rows="3"></textarea>
+          <small class="text-danger"
+            *ngIf="!mostrarInformacion && fichaClinicaForm.get('motivo_consulta')?.touched && fichaClinicaForm.get('motivo_consulta')?.errors?.['required']">
+            El motivo de consulta es requerido
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="examen_fisico">Examen físico:</label>
+          <textarea formControlName="examen_fisico" class="form-control" rows="3"></textarea>
+          <small class="text-danger"
+            *ngIf="!mostrarInformacion && fichaClinicaForm.get('examen_fisico')?.touched && fichaClinicaForm.get('examen_fisico')?.errors?.['required']">
+            El examen físico es requerido
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="intervencion">Intervención:</label>
+          <textarea formControlName="intervencion" class="form-control" rows="3"></textarea>
+          <small class="text-danger"
+            *ngIf="!mostrarInformacion && fichaClinicaForm.get('intervencion')?.touched && fichaClinicaForm.get('intervencion')?.errors?.['required']">
+            La intervención es requerida
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="indicaciones">Indicación:</label>
+          <textarea formControlName="indicaciones" class="form-control" rows="3"></textarea>
+          <small class="text-danger"
+            *ngIf="!mostrarInformacion && fichaClinicaForm.get('indicaciones')?.touched && fichaClinicaForm.get('indicaciones')?.errors?.['required']">
+            Las indicaciones son requeridas
+          </small>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 
 

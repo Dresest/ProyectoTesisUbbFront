@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { LoginForm } from '../_interfaces/loginForm';
 import { GenericService } from './generic.service';
 import jwt_decode from "jwt-decode";
@@ -81,6 +81,13 @@ export class AuthService {
     return this.genericServices.postGenericHeader('/nueva-password', '',body,token)
   }
 
+
+  nuevaContraseña(id: any, newpass: any): Observable<any> {
+    const requestBody = { newpass: newpass }; // Crear un objeto con la propiedad "newpass"
+  
+    return this.http.post(`${this.base_url}/profesional/nuevaPass/${id}`, requestBody);
+  }
+  
   public obtenerToken(){
     let token = localStorage.getItem('token');
     return token

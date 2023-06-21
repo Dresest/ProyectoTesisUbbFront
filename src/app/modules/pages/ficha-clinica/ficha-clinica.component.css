@@ -1,7 +1,9 @@
 .ficha {
     background-color: #c2e7e1;
   }
-  
+  .btn{
+    margin-right: 4px;
+  }
 .btn-primary {
     background-color: #7FBBB2;
   }
@@ -17,3 +19,9 @@
   .table-striped tbody tr:nth-of-type(even) {
     background-color: #dbf6f1;
   }
+  .form-control {
+    border: 1px solid black;
+    background-color: #f2f2f2;
+  }
+  
+  

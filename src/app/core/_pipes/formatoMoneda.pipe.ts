@@ -6,7 +6,14 @@ export class FormatoCostoPipe implements PipeTransform {
   constructor(private decimalPipe: DecimalPipe) {}
 
   transform(value: number): string {
-    const costoFormateado = this.decimalPipe.transform(value, '1.0-0');
-    return costoFormateado!.replace(',', '.');
+    if (value === undefined || value === null) {
+      return '';
+    }
+    return value.toLocaleString('es-CL', {
+      style: 'currency',
+      currency: 'CLP',
+      minimumFractionDigits: 0,
+      useGrouping: true,
+    });
   }
-}
+}  

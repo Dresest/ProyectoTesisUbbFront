@@ -1,9 +1,20 @@
-<div class="table-responsive mt-3" *ngIf="agendas.length > 0">
-  <div class="card col-md-12" *ngIf="mostrarEditarAgenda">
-    <app-editar-agenda (cambiosRealizados)="actualizarAgendas()"></app-editar-agenda>
+<div class="modal fade" id="editarAgenda" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar agenda</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-editar-agenda (cambiosRealizados)="actualizarAgendas()"></app-editar-agenda>
+      </div>
+     
+    </div>
   </div>
-
-  <table class="table table-striped" >
+</div>
+<div class="table-responsive mt-3" *ngIf="agendas.length > 0">
+  <h4>Agendas de hoy</h4>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th class="encabezado-columna">
@@ -61,7 +72,7 @@
         <td style="text-align: left; vertical-align: middle;">{{ agenda.estado.status }}</td>
         <td class="text-center">
           <div class="d-inline-block">
-            <button class="btn btn-primary" (click)="mostrarComponenteEditarAgenda(agenda.id_agenda)">Editar</button>
+            <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editarAgenda" (click)="mostrarComponenteEditarAgenda(agenda.id_agenda)">Editar</button>
           </div>
         </td>
       </tr>
@@ -73,6 +84,82 @@
     <div>
       <button class="btn btn-primary" (click)="cambiarPagina(-5)" [disabled]="inicio === 0">Anterior</button>
       <button class="btn btn-primary ms-3" (click)="cambiarPagina(5)" [disabled]="inicio >= agendas.length - 5">Siguiente</button>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive mt-3" *ngIf="agendasReagendar.length > 0">
+  <h4>Agendas por reagendar</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorPacienteReagendar()">
+            Paciente
+            <span *ngIf="ordenAscendentePReagendar">▼</span>
+            <span *ngIf="!ordenAscendentePReagendar">▲</span>
+          </button>
+        </th>
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorRutReagendar()">
+            Rut
+            <span *ngIf="ordenAscendenteR">▼</span>
+            <span *ngIf="!ordenAscendenteR">▲</span>
+          </button>
+        </th>
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorFechaReagendar()">
+            Fecha
+            <span *ngIf="ordenarPorFechaReagendar">▼</span>
+            <span *ngIf="!ordenarPorFechaReagendar">▲</span>
+          </button>
+        </th>
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorHoraReagendar()">
+            Hora
+            <span *ngIf="ordenarPorHoraReagendar">▼</span>
+            <span *ngIf="!ordenarPorHoraReagendar">▲</span>
+          </button>
+        </th>
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorServicioReagendar()">
+            Servicio
+            <span *ngIf="ordenarPorServicioReagendar">▼</span>
+            <span *ngIf="!ordenarPorServicioReagendar">▲</span>
+          </button>
+        </th>
+        <th class="encabezado-columna">
+          <button class="btn btn-link" (click)="ordenarPorEstadoReagendar()">
+            Estado
+            <span *ngIf="ordenarPorEstadoReagendar">▼</span>
+            <span *ngIf="!ordenarPorEstadoReagendar">▲</span>
+          </button>
+        </th>
+        <th class="encabezado-columna">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let agenda of agendasReagendar | slice:inicioReagendar:(inicioReagendar + 5)">
+        <td style="text-align: left; vertical-align: middle;">{{ agenda.paciente.nombre }} {{ agenda.paciente.apellido }}</td>
+        <td style="text-align: left; vertical-align: middle;">{{ agenda.paciente.rut }}</td>
+        <td style="text-align: left; vertical-align: middle;">{{ agenda.fecha_agendamiento | date: 'dd/MM/yyyy' }}</td>
+        <td style="text-align: left; vertical-align: middle;">{{ agenda.hora_agendamiento | hora | date: 'H:mm' }}</td>
+        <td style="text-align: left; vertical-align: middle;">{{ agenda.servicio.nombre }}</td>
+        <td style="text-align: left; vertical-align: middle;">{{ agenda.estado.status }}</td>
+        <td class="text-center">
+          <div class="d-inline-block">
+            <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editarAgenda" (click)="mostrarComponenteEditarAgenda(agenda.id_agenda)">Editar</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between mb-3">
+    <p class="mb-0">{{ obtenerTextoPaginacionReagendar() }}</p>
+    <div>
+      <button class="btn btn-primary" (click)="cambiarPaginaReagendar(-5)" [disabled]="inicioReagendar === 0">Anterior</button>
+      <button class="btn btn-primary ms-3" (click)="cambiarPaginaReagendar(5)" [disabled]="inicioReagendar >= agendasReagendar.length - 5">Siguiente</button>
     </div>
   </div>
 </div>

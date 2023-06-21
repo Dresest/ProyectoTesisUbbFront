@@ -1,9 +1,30 @@
-<div class="card col-md-12" *ngIf="mostrarAnadirAgenda">
-  <app-agregar-agenda (cambiosRealizados)="actualizarAgendas()"></app-agregar-agenda>
-</div>
 
-<div class="card col-md-12" *ngIf="mostrarEditarAgenda">
-  <app-editar-agenda (cambiosRealizados)="actualizarAgendas()"></app-editar-agenda>
+
+<div class="modal fade" id="editarAgenda" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar agenda</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-editar-agenda (cambiosRealizados)="actualizarAgendas()"></app-editar-agenda></div>
+     
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="agregarAgenda" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar agenda</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-agregar-agenda (cambiosRealizados)="actualizarAgendas()"></app-agregar-agenda></div>
+     
+    </div>
+  </div>
 </div>
 
 <div class="card">
@@ -20,7 +41,8 @@
             <button class="btn btn-primary" (click)="buscarAgendas()">Buscar</button>
           </div>
           <div class="botones">
-            <button class="btn btn-primary" (click)="mostrarComponenteAgregarAgenda()">Agregar Cita</button>
+          
+            <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#agregarAgenda" (click)="mostrarComponenteAgregarAgenda()">Agregar</button>
           </div>
         </div>
       </div>
@@ -84,7 +106,7 @@
               <td style="text-align: left; vertical-align: middle;">{{ agenda.estado.status }}</td>
               <td class="text-center">
                 <div class="d-inline-block">
-                  <button class="btn btn-primary" (click)="mostrarComponenteEditarAgenda(agenda.id_agenda)">Editar</button>
+                  <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editarAgenda" (click)="mostrarComponenteEditarAgenda(agenda.id_agenda)">Editar</button>
                 </div>
               </td>
             </tr>

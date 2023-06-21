@@ -62,6 +62,12 @@ export class AgendaComponent implements OnInit {
       this.agendaService.obtenerAgendasPorRut(this.rutBuscado,this.userInfo.id).subscribe(
         respuesta => {
           this.agendas = respuesta.agendas;
+          const fechaHoy = new Date();
+      fechaHoy.setHours(0, 0, 0, 0); 
+      
+      this.agendas = this.agendas.filter(
+        (agenda) => new Date(agenda.fecha_agendamiento) >= fechaHoy
+      );
          
         },
         error => {
@@ -70,6 +76,7 @@ export class AgendaComponent implements OnInit {
         }
       );
     } else {
+      this.obtenerAgendas();
       this.toastService.showError('Ingrese un rut válido');
     }
   }

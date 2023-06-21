@@ -1,0 +1,43 @@
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.top {
+    z-index: 2000;
+    position: sticky;
+    top: 0;
+}
+.card {
+    margin-top: 15%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen-fondo{
+    margin-top: 15%;
+    margin-left: 25%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    max-width: 400px;
+}
+
+@media screen and (max-width: 1000px) {
+    .imagen-fondo {
+        display: none;
+    }
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f8f8;
+    padding: 10px;
+    text-align: center;
+  }
+  

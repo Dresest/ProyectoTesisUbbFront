@@ -14,7 +14,7 @@ export class PagesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const url = localStorage.getItem('theme') || `./assets/css/colors/blue.css`;
+    const url =  `./assets/css/colors/megna.css`;
 
     this.linkTheme?.setAttribute('href',url);
 

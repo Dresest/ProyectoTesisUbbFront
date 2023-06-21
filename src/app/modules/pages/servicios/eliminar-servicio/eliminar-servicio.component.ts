@@ -37,7 +37,7 @@ export class EliminarServicioComponent implements OnInit {
     this._servicioService.obtenerServiciosPorNombre(this.servicioSeleccionado).subscribe(
       respuesta => {
           this.idServicio = respuesta.servicio.id_servicio;
-          console.log(this.idServicio);
+   
           this.eliminarServicio();
           this.cambiosRealizados.emit();
       },
@@ -51,6 +51,7 @@ export class EliminarServicioComponent implements OnInit {
     this._servicioService.eliminarServicioAProfesional(this.idServicio,this.userInfo.id).subscribe(
       (response) => {
         this.toastService.showSuccess("Se elimino el servicio");
+        this.ngOnInit();
       },
       error => {
         console.log(error);

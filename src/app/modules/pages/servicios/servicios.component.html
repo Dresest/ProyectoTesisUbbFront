@@ -1,17 +1,16 @@
-<div class="row">
+<div class="row" id="contenedor">
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Administrar Servicios</h4>
       <ul class="nav d-flex  align-items-center">
         <li class="nav-item">
-          <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#crearServicio">Crear</button>
-
+          <button *ngIf="userInfo.id === 2" type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#crearServicio">Crear</button>
         </li>
         <li class="nav-item">
-          <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#aregarServicio" >Agregar</button>
+          <button  type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#aregarServicio" >Agregar</button>
         </li>
         <li class="nav-item">
-          <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#modificarServicio" >Modificar</button>
+          <button *ngIf="userInfo.id === 2" type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#modificarServicio" >Modificar</button>
         </li>
         <li class="nav-item">
           <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#eliminarServicio">Eliminar</button>
@@ -48,7 +47,8 @@
             <tbody>
               <tr *ngFor="let servicio of servicios.slice((paginaActual - 1) * numServicioPorPagina, paginaActual * numServicioPorPagina)">
                 <td>{{ servicio.nombre }}</td>
-                <td>{{ servicio.costo | formatoCosto}}</td>
+                <td>{{ servicio.costo.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' }) }}</td>
+
               </tr>
             </tbody>
           </table>
@@ -88,13 +88,13 @@
           </tr>
         </tbody>
       </table>
-      <div class="d-flex justify-content-between align-items-center mt-3">
+      <!-- <div class="d-flex justify-content-between align-items-center mt-3">
         <p class="mb-0">{{ obtenerTextoPaginacionT() }}</p>
         <div>
           <button class="btn btn-primary mr-2" [disabled]="paginaActualT === 1" (click)="paginaActualT = paginaActualT - 1">Anterior</button>
           <button class="btn btn-primary" [disabled]="paginaActualT * numAgendasPorPaginaT >= serviciosTop.length" (click)="paginaActualT = paginaActualT + 1">Siguiente</button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

@@ -40,6 +40,10 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { SortPipe } from 'src/app/core/_pipes/sort.pipe';
 import { RecuperarComponent } from './recuperar/recuperar.component';
+import { LandPageComponent } from './land-page/land-page.component';
+import { ReporteComponent } from './reportes/reporte/reporte.component';
+import { RegistroComponent } from './registro/registro.component';
+
 
 @NgModule({
   declarations: [
@@ -66,8 +70,10 @@ import { RecuperarComponent } from './recuperar/recuperar.component';
     EditarAgendaComponent,
     CrearPacienteComponent,
     NuevaPasswordComponent,
-    RecuperarComponent
-
+    RecuperarComponent,
+    LandPageComponent,
+    ReporteComponent,
+    RegistroComponent
   ], exports: [
     InicioComponent,
     NgChartsModule,
@@ -75,6 +81,7 @@ import { RecuperarComponent } from './recuperar/recuperar.component';
     HeaderComponent,
     SidebarComponent,
     ToastModule,
+    
   ],
   imports: [
     FormsModule,

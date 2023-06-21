@@ -1,21 +1,19 @@
-<div class="card">
+<div class="card" *ngIf="servicios">
   <div class="card-body">
-
     <form>
       <div class="form-group max-height">
         <label for="servicio">Servicio:</label>
         <select id="servicio" class="form-control" [(ngModel)]="servicioSeleccionado" name="servicio"
           [ngModelOptions]="{standalone: true}">
-          <option *ngFor="let servicio of servicios" [ngValue]="servicio.nombre">{{ servicio.nombre }}</option>
+          <ng-container *ngIf="servicios">
+            <option *ngFor="let servicio of servicios" [ngValue]="servicio">{{ servicio.nombre }}</option>
+          </ng-container>
         </select>
-
       </div>
       <div class="col-12">
         <div class="modal-footer d-flex justify-content-end">
-         
-          <button class="btn btn-secondary mt-2" data-bs-dismiss="modal" >cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="buscarServicioPorNombre()"
-            data-bs-dismiss="modal">Agregar</button>
+          <button class="btn btn-secondary mt-2" data-bs-dismiss="modal">cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="buscarServicioPorNombre()" data-bs-dismiss="modal">Agregar</button>
         </div>
       </div>
     </form>

@@ -55,7 +55,7 @@ export class AgregarAgendaComponent implements OnInit {
   }
 
   obtenerServicios(): void {
-    this._servicioService.obtenerServiciosNoRelacionadosPorProfesional(this.userInfo.id).subscribe(respuesta => {
+    this._servicioService.obtenerServiciosPorProfesional(this.userInfo.id).subscribe(respuesta => {
       this.servicios = respuesta.servicios;
     });
   }
@@ -131,9 +131,7 @@ export class AgregarAgendaComponent implements OnInit {
         this.toastService.showSuccess(respuesta.message);
         this.cambiosRealizados.emit();
       },
-      error => {
-        this.toastService.showError(error.message);
-      }
+      
     );
   }
 }

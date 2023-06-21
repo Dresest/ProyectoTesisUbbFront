@@ -45,6 +45,7 @@ export class AgregarServicioComponent implements OnInit {
         costo: "",
        
       });
+      this.ngOnInit();
       this.cambiosRealizados.emit();
       },
       error => {

@@ -1,68 +1,61 @@
-<div class="card container-fluid">
-  <div class="card-body">
-    <h4 class="card-title">Editar agenda</h4>
-    <form>
-
-      <div class="form-group">
-          <label for="nombrePaciente">Paciente</label>
-          <input type="text" id="nombrePaciente" name="nombrePaciente"  [value]="nombrePaciente" readonly class="form-control">
-        </div>
-        
-        
 
 
-    </form>
+<form>
+  <div class="form-group">
+    <label for="nombrePaciente">Paciente</label>
+    <input type="text" id="nombrePaciente" name="nombrePaciente" [value]="nombrePaciente" readonly class="form-control">
+  </div>
+</form>
 
-    <!-- formulario para ingresar un agendamiento -->
-    <form [formGroup]="servicioFrom" class="d-flex ">
-        <!-- Fecha -->
-    <div class="form-group mr-2">
-      <label for="fecha_agendamiento">Fecha:</label>
-      <input type="text" placeholder="1/1/202x" formControlName="fecha_agendamiento" class="form-control" matInput
-        [matDatepicker]="picker"  [matDatepickerFilter]="fechaPermitida">
-      <small class="text-danger"
-             *ngIf="servicioFrom.get('fecha_agendamiento')?.touched && servicioFrom.get('fecha_agendamiento')?.errors?.['required']">
-        La fecha es requerida
-      </small>
-    </div>
-    <div class="calendar">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </div>
-      
+<!-- Formulario para ingresar un agendamiento -->
+<form [formGroup]="servicioFrom" class="d-flex">
+  <!-- Fecha -->
+  <div class="form-group mr-2">
+    <label for="fecha_agendamiento">Fecha:</label>
+    <input type="text" placeholder="1/1/202x" formControlName="fecha_agendamiento" class="form-control" matInput
+      [matDatepicker]="picker" [matDatepickerFilter]="fechaPermitida">
+    <small class="text-danger"
+      *ngIf="servicioFrom.get('fecha_agendamiento')?.touched && servicioFrom.get('fecha_agendamiento')?.errors?.['required']">
+      La fecha es requerida
+    </small>
+  </div>
+  <div class="calendar">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </div>
 
+  <div class="form-group">
+    <label for="hora_agendamiento">Hora:</label>
+    <select class="form-control" id="hora_agendamiento" name="hora_agendamiento" formControlName="hora_agendamiento"
+      [(ngModel)]="horaAgendamiento">
+      <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+    </select>
+    <small class="text-danger"
+      *ngIf="servicioFrom.get('hora_agendamiento')?.touched && servicioFrom.get('hora_agendamiento')?.errors?.['required']">
+      La hora es requerida
+    </small>
+  </div>
 
-    <div class="form-group">
-      <label for="hora_agendamiento">Hora:</label>
-      <select class="form-control" id="hora_agendamiento" name="hora_agendamiento" formControlName="hora_agendamiento" [(ngModel)]="horaAgendamiento">
-        <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
-      </select>
-      <small class="text-danger"
-             *ngIf="servicioFrom.get('hora_agendamiento')?.touched && servicioFrom.get('hora_agendamiento')?.errors?.['required']">
-        La hora es requerida
-      </small>
-    </div>
+  <div class="form-group">
+    <label for="estado">Estado:</label>
+    <select class="form-control" id="estado" name="estado" formControlName="estado" [(ngModel)]="estadoSeleccionado">
+      <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+    </select>
+  </div>
 
-      <div class="form-group">
-        <label for="estado">Estado:</label>
-        <select class="form-control" id="estado" name="estado" formControlName="estado" [(ngModel)]="estadoSeleccionado" >
-          <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
-        </select>
-      </div>
+  <div>
+    <label for="servicio">Servicio:</label>
+    <select id="servicio" class="form-control" [(ngModel)]="servicioSeleccionado" name="servicio"
+      [ngModelOptions]="{standalone: true}" (change)="buscarServicios()">
+      <option *ngFor="let servicio of servicios" [ngValue]="servicio.nombre">{{ servicio.nombre }}</option>
+    </select>
+  </div>
+</form>
 
-      <div>
-        <label for="servicio">Servicio:</label>
-        <select id="servicio" class="form-control" [(ngModel)]="servicioSeleccionado" name="servicio"
-          [ngModelOptions]="{standalone: true}" (change)="buscarServicios()">
-          <option *ngFor="let servicio of servicios" [ngValue]="servicio.nombre">{{ servicio.nombre }}</option>
-        </select>
-      </div>
-
-    </form>
-    <div class=" d-flex justify-content-betwen">
-      <button class="btn btn-primary mr-2" (click)="guardarCambios()" [disabled]="!formularioCompleto">Guardar</button>
-
-      <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
-    </div>
+<div class="col-12">
+  <div class="modal-footer d-flex justify-content-end">
+    <button class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelarEdicion()">Cancelar</button>
+    <button class="btn btn-primary mr-2" data-bs-dismiss="modal" (click)="guardarCambios()"
+      [disabled]="!formularioCompleto">Guardar</button>
   </div>
 </div>

@@ -21,7 +21,7 @@ export class CrearPacienteComponent implements OnInit {
   ngOnInit(): void {
     this.pacienteForm = this.formBuilder.group({
     
-        alergia: ['', Validators.required],
+      alergias: ['', Validators.required],
         nombre: ['', Validators.required],
         apellido: ['', Validators.required],
         direccion: ['', Validators.required],
@@ -38,12 +38,18 @@ export class CrearPacienteComponent implements OnInit {
 
   }
   onRutInput(event: any) {
-    let rut = event.target.value.replace(/[^\d]/g, ''); 
+    let rut = event.target.value.replace(/[^\dKk]/g, ''); 
     rut = rut.substring(0, 12); 
     rut = rut.substring(0, rut.length - 1) + '-' + rut.substring(rut.length - 1); 
+  
+    if (rut.charAt(rut.length - 2).toUpperCase() === 'K') {
+      rut = rut.slice(0, -2) + 'K';
+    }
+  
     rut = rut.replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1.'); 
     this.pacienteForm.patchValue({ rut: rut });
-}
+  }
+  
 
 onEdadInput(event: any) {
   let edad = event.target.value.replace(/[^\d]/g, ''); 
@@ -66,7 +72,7 @@ onTelefonoInput(event: any) {
 
   guardarCambios(): void {
     const datosFormulario = this.pacienteForm.value;
-    console.log(datosFormulario);
+
   
     if (this.pacienteForm.valid) {
       let campoVacio = false;
@@ -87,6 +93,7 @@ onTelefonoInput(event: any) {
           (response) => {
             this.toastService.showSuccess('se registro el paciente');
             this.ngOnInit();
+            this.router.navigate(['/paciente']);
           }
         );
       }

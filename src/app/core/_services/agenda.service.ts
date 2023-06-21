@@ -32,12 +32,21 @@ export class AgendaService {
   obtenerAgendaPorID(id: number): Observable<any> {
     return this.http.get(`${this.base_url}/obtenerAgendaPorId/${id}`);
   }
+  reporteAnual(id_profesional: string): Observable<any> {
+    return this.http.get(`${this.base_url}/reporteAnual/${id_profesional}`);
+  }
+  reporteMesActual(id_profesional: string): Observable<any> {
+    return this.http.get(`${this.base_url}/reporteMesActual/${id_profesional}`);
+  }
   obtenerAgendasProfesional(id_profesional: string): Observable<any> {
     return this.http.get(`${this.base_url}/obtenerAgendasProfesional/${id_profesional}`);
   }
   
   agregarAgenda(data: any): Observable<any> {
     return this.http.post(`${this.base_url}/agregarAgenda`, data);
+  }
+  agregarAgendaWeb(data: any): Observable<any> {
+    return this.http.post(`${this.base_url}/agregarAgendaOnline`, data);
   }
   
   editarAgenda(id: number, agenda: any): Observable<any> {

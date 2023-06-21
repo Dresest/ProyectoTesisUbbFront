@@ -1,0 +1,115 @@
+<div class="top"><app-toolbar></app-toolbar></div>
+
+<div class="row">
+    <div class="col-md-6">
+        <img src="../../../../../assets/images/Logo_login.png" class="imagen-fondo"
+            style="float: left; margin-right: 20px;">
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body border-0 shadow-sm">
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Datos personales</h4>
+                        <form [formGroup]="profesionalForm" (ngSubmit)="onSubmit()">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nombre" class="mr-2">Nombre:</label>
+                                    <input type="text" formControlName="nombre" placeholder="Ingrese el nombre"
+                                        class="form-control" required>
+                                    <small class="text-danger"
+                                        *ngIf="profesionalForm.get('nombre')?.touched && profesionalForm.get('nombre')?.errors?.['required']">
+                                        El nombre es requerido
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="apellido" class="mr-2">Apellido:</label>
+                                    <input type="text" formControlName="apellido" placeholder="Ingrese el apellido"
+                                        class="form-control" required>
+                                    <small class="text-danger"
+                                        *ngIf="profesionalForm.get('apellido')?.touched && profesionalForm.get('apellido')?.errors?.['required']">
+                                        El apellido es requerido
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="rut">Rut:</label>
+                                    <input type="text" formControlName="rut" placeholder="Ingrese el rut"
+                                        (input)="onRutInput($event)" class="form-control" required minlength="11"
+                                        maxlength="12">
+                                    <small class="text-danger"
+                                        *ngIf="profesionalForm.get('rut')?.touched && profesionalForm.get('rut')?.errors?.['required']">
+                                        El rut es requerido
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="direccion">Dirección:</label>
+                                    <input type="text" formControlName="direccion" placeholder="Ingrese la dirección"
+                                        class="form-control" required>
+                                    <small class="text-danger"
+                                        *ngIf="profesionalForm.get('direccion')?.touched && profesionalForm.get('direccion')?.errors?.['required']">
+                                        La dirección es requerida
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input type="text" formControlName="telefono" (input)="onTelefonoInput($event)"
+                                        placeholder="+569 xxxxxxxx" class="form-control" required>
+                                    <small class="text-danger"
+                                        *ngIf="profesionalForm.get('telefono')?.touched && profesionalForm.get('telefono')?.errors?.['required']">
+                                        El teléfono es requerido
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">Email:</label>
+                                    <input type="text" formControlName="email" placeholder="Ingrese el email"
+                                        class="form-control" required>
+                                    <small class="text-danger"
+                                        *ngIf="profesionalForm.get('email')?.touched && profesionalForm.get('email')?.errors?.['required']">
+                                        El email es requerido
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="contraseña">Contraseña:</label>
+                                    <input type="contraseña" formControlName="contraseña"
+                                        placeholder="Ingrese la contraseña" class="form-control" required>
+                                    <small class="text-danger"
+                                        *ngIf="profesionalForm.get('contraseña')?.touched && profesionalForm.get('contraseña')?.errors?.['required']">
+                                        La contraseña es requerida
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="confirmcontraseña">Confirmar contraseña:</label>
+                                    <input type="password" formControlName="confirmcontraseña"
+                                        placeholder="Confirme la contraseña" class="form-control" required>
+                                    <small class="text-danger"
+                                        *ngIf="profesionalForm.get('confirmcontraseña')?.touched && profesionalForm.get('confirmcontraseña')?.errors?.['required']">
+                                        Confirmar la contraseña es requerido
+                                    </small>
+                                    <small class="text-danger" *ngIf="profesionalForm.hasError('contraseñaMismatch')">
+                                        Las contraseñas no coinciden
+                                    </small>
+
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" [disabled]="profesionalForm.invalid"
+                                    class="btn btn-primary">Registrar</button>
+                                <button type="button" class="btn btn-secondary ml-2"
+                                    (click)="cancelarRegistro()">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    © 2023 Universidad del Bío Bío // Centro Kinésico Claudio Vásquez
+</footer>

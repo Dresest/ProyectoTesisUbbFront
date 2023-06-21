@@ -1,0 +1,66 @@
+th.encabezado-columna button.btn-link {
+  color: inherit;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+
+.botones {
+margin-right: 10px;
+}
+
+.table {
+  margin-top: 1.5rem;
+
+}
+
+.form-group {
+  margin-bottom: 0.5rem;
+}
+
+.btn {
+  margin-top: 1rem;
+}
+
+
+/* Preguntar por los bordes */
+table, th, td {
+  border: 1px solid black;
+
+}
+
+td {
+  border: 1px solid black;
+ 
+}
+
+.encabezado-columna {
+  background-color: #7ddfcd;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #faffff;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #dbf6f1;
+}
+
+
+.btn-primary {
+  background-color: #7FBBB2;
+}
+
+.btn-link {
+  color: #E4DED0;
+}
+
+
+.col-12{
+  margin-bottom: 20px;
+}

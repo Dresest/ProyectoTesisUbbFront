@@ -16,7 +16,6 @@ export class PacientesComponent implements OnInit {
   pacientes: any[] = [];
   searchText: string = '';
   pacienteFicha: boolean = false;
-
   mostrarLista: boolean = false;
   pacienteSeleccionado: any;
   pacienteForm: FormGroup = new FormGroup({});
@@ -84,6 +83,7 @@ export class PacientesComponent implements OnInit {
 
   seleccionarPaciente(paciente: any): void {
     this.pacienteSeleccionado = paciente;
+  
     this.pacienteFicha=true;
     this.pacienteService.enviarIdPaciente(paciente.rut); 
     if(this.pacienteSeleccionado.is_activo ==true){
@@ -99,11 +99,14 @@ export class PacientesComponent implements OnInit {
   }
 
   toggleInformacion(): void {
-    if (this.mostrarInformacion) {
-      this.informacionOriginal = { ...this.pacienteSeleccionado };
+    if (this.pacienteSeleccionado) {
+      if (this.mostrarInformacion) {
+        this.informacionOriginal = { ...this.pacienteSeleccionado };
+      }
+      this.mostrarInformacion = !this.mostrarInformacion;
     }
-    this.mostrarInformacion = !this.mostrarInformacion;
   }
+
 
   cancelarEdicion(): void {
     this.pacienteSeleccionado = { ...this.informacionOriginal };

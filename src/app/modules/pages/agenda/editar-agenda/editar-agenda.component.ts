@@ -37,7 +37,7 @@ private subscription!: Subscription;
   formularioCompleto = false;
 
   estados: string[] = [
-    'pendiente', 'cancelada', 'realizada',
+    'pendiente', 'cancelada', 'realizada','reagendar'
   ];
   horas: string[] = [
     '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
@@ -58,10 +58,13 @@ private subscription!: Subscription;
   ngOnInit(): void {
     this.subscription = this.agendaService.idAgendaSeleccionada$.subscribe(
       idAgendaSeleccionada => {
-        this.idAgendaSeleccionada = idAgendaSeleccionada;
-        this.obtenerAgenda();
+        if (idAgendaSeleccionada) {
+          this.idAgendaSeleccionada = idAgendaSeleccionada;
+          this.obtenerAgenda();
+        }
       }
     );
+    
     this.userInfo = this._authService.obtenerInformacionToken();
     this.obtenerPacientes();
     this.obtenerServicios();
@@ -77,7 +80,7 @@ private subscription!: Subscription;
     });
     
     
-    this.obtenerAgenda();
+   
   }
 
   
@@ -152,7 +155,7 @@ private subscription!: Subscription;
           }
         },
         error => {
-          console.log(error);
+        
         }
       );
     } else {
@@ -171,6 +174,9 @@ private subscription!: Subscription;
     } else if (this.estadoSeleccionado === 'realizada') {
       // estado es realizada
       this.estadoNumero = 3;
+    }else if (this.estadoSeleccionado === 'reagendar') {
+      // estado es realizada
+      this.estadoNumero = 4;
     }
     
     
@@ -188,7 +194,7 @@ private subscription!: Subscription;
       this.toastService.showSuccess(respuesta.message);
       this.cambiosRealizados.emit();
     }, error => {
-      this.toastService.showError(error.message);
+      
     });
 
   }

@@ -1,0 +1,199 @@
+/* General */
+.body-cuerpo {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-subtitle {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #25D366;
+}
+
+.section-description {
+  text-align: justify;
+  color: #555555;
+  margin-bottom: 15px;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.container{
+  padding-top: 15px;
+}
+
+.whatsapp-link {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #25D366;
+  color: #fff;
+  border-radius: 50%;
+  z-index: 9999;
+}
+
+.whatsapp-link:hover {
+  background-color: #128C7E;
+}
+
+/* Navbar */
+.navbar {
+  background-color: white;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  padding-left: 3%;
+  left: 0;
+}
+
+.navbar-collapse {
+  display: flex;
+  justify-content: right;
+  padding-right: 3%;
+}
+
+.nav-link {
+  color: black;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  color: gray;
+  transition: 0.3s;
+}
+
+/* Carrusel */
+.carousel {
+  z-index: 1;
+}
+
+.carousel-img {
+  height: 526px;
+  width: 1229px;
+}
+
+.carousel p {
+  color: black;
+}
+
+.carousel-titulo {
+  font-size: 50px;
+}
+
+/* Card */
+.card-title {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.card-text {
+  text-align: justify;
+}
+
+.img-small {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.card.servicio:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card.servicio:hover .card-title {
+  color: #25D366;
+}
+
+.btn-primary {
+  background-color: #7FBBB2;
+}
+
+
+
+.carousel-item {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-inner {
+  width: 100%;
+}
+
+.carousel-inner > .carousel-item {
+  display: none;
+  position: relative;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-inner > .carousel-item.active,
+.carousel-inner > .carousel-item-next.carousel-item-left,
+.carousel-inner > .carousel-item-prev.carousel-item-right {
+  display: block;
+}
+
+.carousel-inner > .carousel-item.active {
+  opacity: 1;
+}
+
+.carousel-inner > .carousel-item-next,
+.carousel-inner > .carousel-item-prev {
+  position: relative;
+  transform: translate3d(0, 0, 0);
+}
+
+.carousel-inner > .carousel-item-next.carousel-item-left,
+.carousel-inner > .carousel-item-prev.carousel-item-right {
+  transform: translate3d(0, 0, 0);
+}
+
+
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+  margin-right: 15%;
+  margin-left: 15%;
+  list-style: none;
+}
+
+.carousel-indicators li {
+  box-sizing: content-box;
+  flex: 0 1 auto;
+  width: 10px;
+  height: 10px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  opacity: 0.5;
+  transition: opacity 0.6s ease;
+}
+
+.carousel-indicators li.active {
+  background-color: #fff;
+  opacity: 1;
+}
+.mdi-custom-icon {
+  font-size: 69px; 
+}

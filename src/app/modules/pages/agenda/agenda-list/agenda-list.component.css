@@ -8,7 +8,13 @@ th.encabezado-columna button.btn-link {
     cursor: pointer;
     border-radius: 20px;
   }
-
+  .modal {
+    z-index: 1055 !important;
+  }
+  .mat-datepicker-overlay {
+    z-index: 105 !important;
+  }
+  
   
 .botones {
   margin-right: 10px;

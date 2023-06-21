@@ -1,6 +1,4 @@
-<div class="card container-fluid">
-  <div class="card-body">
-    <h4 class="card-title">Añadir agenda</h4>
+
     <form>
 
       <div class="form-group max-height">
@@ -55,9 +53,15 @@
       </div>
       
     </form>
-    <div class="d-flex justify-content-betwen">
-      <button class="btn btn-primary mr-2" (click)="guardarCambios()" [disabled]="!camposCompletos()">Guardar</button>
-      <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
+    <div class="col-12">
+      <div class="modal-footer d-flex justify-content-end">
+        <button class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelarEdicion()">Cancelar</button>
+      <button class="btn btn-primary mr-2" (click)="guardarCambios()" data-bs-dismiss="modal"  [disabled]="!camposCompletos()">Guardar</button>
+  
     </div>
   </div>
-</div>
+  
+
+    
+        
+        
