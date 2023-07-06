@@ -1,28 +1,164 @@
-<div class="card">
-        <div class="card-body">
-          <h1 class="card-title">Reportes</h1>
-          <button class="btn btn-primary btn-sm" style="position: absolute; top: 10px; right: 10px;" (click)="pdf()">Descargar</button>
-      
-          <div class="container" id="Reportes">
-            <!-- Resto del contenido de la tarjeta --><div class="row">
-              <div class="col-md-8">
-                <h4 class="card-title">Resumen de agenda anual</h4>
-                <canvas baseChart class="chart" [data]="barChartData" [labels]="barChartLabels"
-                  [options]="barChartOptions" [type]="barChartType" [plugins]="barChartPlugins"></canvas>
-              </div>
-              <div class="col-md-4">
-                <h4 class="card-title">Comparativa agendas manuales y online</h4>
-                <div class="row">
-                  <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType"
-                    [options]="pieChartOptions" [plugins]="pieChartPlugins"></canvas>
+<div class="card" id="Reportes">
+  <div class="card-body">
+    <h1 class="card-title">Reportes</h1>
+
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card border-2 border-lightblue shadow-sm rounded report-card">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="media-body text-left">
+                  <h3   style="color: #17a2b8;">{{cantidadPacientes}}</h3>
+                  <span class="text-muted">Cantidad de Pacientes</span>
+                </div>
+                <div class="align-self-center">
+                  <i class="mdi mdi-account success font-large-2 float-right icono" style="color: #17a2b8;"></i>
                 </div>
               </div>
             </div>
           </div>
-      
-          <mat-divider style="margin: 1em 0;"></mat-divider>
         </div>
       </div>
-      
+    
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card border-2 border-primary shadow-sm rounded report-card">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="media-body text-left">
+                  <h3 class="text-primary">{{cantidadServicios}}</h3>
+                  <span class="text-muted">Cantidad de Servicios</span>
+                </div>
+                <div class="align-self-center">
+                  <i class="mdi mdi-briefcase-outline primary font-large-2 float-right icono" style="color: #007bff;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card border-2 border-info shadow-sm rounded report-card">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="media-body text-left">
+                  <h3 class="text-info">{{contarProf}}</h3>
+                  <span class="text-muted">Cantidad de Profesionales</span>
+                </div>
+                <div class="align-self-center">
+                  <i class="mdi mdi-account-group-outline info font-large-2 float-right icono" style="color: #17a2b8;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="col-xl-3 col-sm-6 col-12" *ngIf="profesional.id === 2">
+        <div class="card border-2 border-warning shadow-sm rounded report-card">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media d-flex">
+                <div class="media-body text-left">
+                  <h3 class="text-warning">{{cantidadAgendas}}</h3>
+                  <span class="text-muted">Cantidad de Agendas</span>
+                </div>
+                <div class="align-self-center">
+                  <i class="mdi mdi-calendar-clock warning font-large-2 float-right icono" style="color: #ffc107;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <button class="btn btn-primary btn-sm" style="position: absolute; top: 10px; right: 10px;"
+      (click)="pdf()">Descargar</button>
+<div class="card">
 
+
+ 
+</div>
+
+
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-6" *ngIf="profesional.id === 2">
+          <h4 class="card-title">Cantidad de agendas por profesional</h4>
+          <canvas baseChart class="chart" [data]="barChartDataProfesionales" [labels]="barChartLabelsProfesionales"
+            [options]="barChartOptionsProfesionales" [type]="barChartTypeProfesionales"
+            [plugins]="barChartPluginsProfesionales" [ngClass]="{'centrado': centrarGraficos}"></canvas>
+        </div>
+
+        <div class="col-md-6" *ngIf="profesional.id === 2">
+          <div class="row">
+            <h4 class="card-title">Comparativa agendas manuales y online</h4>
+            <div class="col-md-7 "> <!-- Agrega la clase "justify-content-center" -->
+              <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"
+                [plugins]="pieChartPlugins"></canvas>
+            </div>
+          </div>
+        </div>
+        
+        
+
+        <div class="col-md-8">
+          <h4 class="card-title">Resumen de agenda anual</h4>
+          <canvas baseChart class="chart" [data]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [type]="barChartType" [plugins]="barChartPlugins" [ngClass]="{'centrado': centrarGraficos}"></canvas>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <mat-divider style="margin: 1em 0;"></mat-divider>
+  </div>
+</div>
+
+
+
+<div class="card"  *ngIf="mostrarPdf">
+  <div class="card-body">
+    <div class="container" >
       
+      <div class="row justify-content-center">
+        <div class="col-md-8"  *ngIf="profesional.id === 2">
+          <h4 class="card-title ">Cantidad de agendas por profesional</h4>
+          <div class="d-flex justify-content-center">
+            <canvas baseChart class="chart" [data]="barChartDataProfesionales" [labels]="barChartLabelsProfesionales"
+              [options]="barChartOptionsProfesionales" [type]="barChartTypeProfesionales"
+              [plugins]="barChartPluginsProfesionales" [ngClass]="{'centrado': centrarGraficos}"></canvas>
+          </div>
+        </div>
+      </div>
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <h4 class="card-title" >Resumen de agenda anual</h4>
+            <div class="d-flex justify-content-center">
+              <canvas baseChart class="chart" [data]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [type]="barChartType" [plugins]="barChartPlugins" [ngClass]="{'centrado': centrarGraficos}"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+        <div class="col-md-6" *ngIf="profesional.id === 2">
+          <h4 class="card-title" >Comparativa agendas manuales y online</h4>
+          <div class="d-flex justify-content-center">
+            <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"
+              [plugins]="pieChartPlugins"></canvas>
+          </div>
+        </div>
+      </div>
+   
+    </div>
+
+    <mat-divider style="margin: 1em 0;"></mat-divider>
+  </div>
+</div>

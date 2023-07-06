@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  base_url: 'http://localhost:3006/api'
+  base_url: 'http://pacheco.chillan.ubiobio.cl:3018/api'
+ 
 };

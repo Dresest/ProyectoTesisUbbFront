@@ -2,3 +2,25 @@
     background-color: #7FBBB2;
     margin-left: 15px;
   }
+  .grey-bg {  
+    background-color: #F5F7FA;
+}
+
+.report-card {
+  background-color: #f8f9fa; /* Color de fondo personalizado */
+  border-color: #28a745; /* Color de borde personalizado */
+}
+.icono {
+  font-size: 40px; /* Cambia el tamaño del icono según tus necesidades */
+  display: inline-block;
+  width: 24px; /* Mantiene el tamaño original del icono */
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

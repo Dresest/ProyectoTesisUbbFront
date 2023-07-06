@@ -24,4 +24,9 @@
     background-color: #f2f2f2;
   }
   
+  .expired-button {
+    background-color: 7FBBB2;
+    color: white;
+    cursor: not-allowed;
+  }
   

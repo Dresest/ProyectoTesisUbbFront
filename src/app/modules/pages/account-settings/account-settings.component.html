@@ -20,9 +20,10 @@
       </form>  </div>
       <div class="col-12">
         <div class="modal-footer d-flex justify-content-end">
-          <button class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelarEdicion()">Cancelar</button>
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="emailForm.invalid" (click)="invitar()">Enviar</button>
-        </div>
+          <button class="btn btn-secondary" data-bs-dismiss="modal" title="Cancelar" (click)="cancelarEdicion()">Cancelar</button>
+
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="emailForm.invalid" title="Enviar" (click)="invitar()">Enviar</button>
+           </div>
       </div>
     </div>
   </div>

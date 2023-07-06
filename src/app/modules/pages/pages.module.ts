@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { NgChartsModule } from 'ng2-charts';
 import { GraficaPieComponent } from './grafica-pie/grafica-pie.component';
@@ -43,6 +44,7 @@ import { RecuperarComponent } from './recuperar/recuperar.component';
 import { LandPageComponent } from './land-page/land-page.component';
 import { ReporteComponent } from './reportes/reporte/reporte.component';
 import { RegistroComponent } from './registro/registro.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -91,7 +93,7 @@ import { RegistroComponent } from './registro/registro.component';
     RouterModule,
     NgChartsModule,
     MatListModule,
-   
+    MatTooltipModule,
     
     HttpClientModule,
     CommonModule,
@@ -101,7 +103,7 @@ import { RegistroComponent } from './registro/registro.component';
     MatCardModule,
 
   ],
-  providers: [SortPipe],
+  providers: [SortPipe,DatePipe],
   bootstrap: [],
 })
 export class PagesModule { }

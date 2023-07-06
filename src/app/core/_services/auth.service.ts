@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { LoginForm } from '../_interfaces/loginForm';
 import { GenericService } from './generic.service';
 import jwt_decode from "jwt-decode";
@@ -14,9 +14,9 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class AuthService {
   base_url=environment.base_url;
-  
+  private cambiosUsuarioSubject = new Subject<void>();
 
-
+  cambiosUsuario$ = this.cambiosUsuarioSubject.asObservable();
   constructor(
     private http: HttpClient, 
     private router:Router, 
@@ -25,9 +25,16 @@ export class AuthService {
     private toastService: ToastService,
     ) { }
   
+  notificarCambiosUsuario(): void {
+    this.cambiosUsuarioSubject.next();
+  }
+
+
+ 
 
 
   login(data: LoginForm) {
+    console.log(this.base_url);
     return this.http.post(`${this.base_url}/login`, data).pipe(
       tap((res: any) => {
           localStorage.setItem('token', res.token)
@@ -53,6 +60,7 @@ export class AuthService {
 
 
   logout(message:any = false, messageType:string = "info") {
+
     localStorage.clear();
     if(typeof(message)==="string" && message.trim() !== ""){
       switch(messageType){

@@ -13,6 +13,7 @@ import { FichaClinicaComponent } from './ficha-clinica/ficha-clinica.component';
 import { CrearPacienteComponent } from './pacientes/crear-paciente/crear-paciente.component';
 import { LandPageComponent } from './land-page/land-page.component';
 import { ReporteComponent } from './reportes/reporte/reporte.component';
+import { GraficaPieComponent } from './grafica-pie/grafica-pie.component';
 
 const routes: Routes = [
   {
@@ -71,7 +72,7 @@ const routes: Routes = [
       },
       {
         path: 'reporte',
-        component: ReporteComponent,
+        component: GraficaPieComponent,
         canActivate: [AuthGuard],
         data: { titulo: 'reporte' }
         

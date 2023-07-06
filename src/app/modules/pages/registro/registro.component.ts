@@ -42,6 +42,7 @@ export class RegistroComponent implements OnInit {
         this.toastService.showSuccess('Profesional registrado exitosamente');
         
         this.profesionalForm.reset();
+        this.router.navigate(['/login']);
     
       },
       (error) => {

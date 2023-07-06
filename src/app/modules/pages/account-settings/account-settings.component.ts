@@ -92,6 +92,24 @@ export class AccountSettingsComponent implements OnInit {
 
     this.informacionOriginal = { ...this.profesional };
   }
+
+
+ 
+  guardarCambios(): void {
+    this.mostrarInformacion = true;
+    const datosFormulario = this.profesionalForm.value;
+    const hayCambios = JSON.stringify(this.informacionOriginal) !== JSON.stringify(datosFormulario);
+    if (hayCambios) {
+      this._profesionalService.actualizarInformacionProfesional(this.profesional.id, this.profesionalForm.value).subscribe(
+        (response) => {
+          this.toastService.showSuccess('La información del profesional se ha actualizado exitosamente');
+          this.mostrarInformacion = true;
+          this.ngOnInit();
+          this._authService.notificarCambiosUsuario(); 
+        }
+      );
+    }
+  }
   checkPasswords(group: any) {
     let pass = group.controls.newpass.value;
     let confirmPass = group.controls.password_confirm.value;
@@ -276,21 +294,6 @@ export class AccountSettingsComponent implements OnInit {
     rut = rut.substring(0, rut.length - 1) + '-' + rut.substring(rut.length - 1); // Insertar guión antes del dígito verificador
     rut = rut.replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1.'); // Agregar puntos de separación de miles
     this.profesionalForm.patchValue({ rut: rut });
-  }
-
-  guardarCambios(): void {
-    this.mostrarInformacion = true;
-    const datosFormulario = this.profesionalForm.value;
-    const hayCambios = JSON.stringify(this.informacionOriginal) !== JSON.stringify(datosFormulario);
-    if (hayCambios) {
-      this._profesionalService.actualizarInformacionProfesional(this.profesional.id, this.profesionalForm.value).subscribe(
-        (response) => {
-          this.toastService.showSuccess('La información del profesional se ha actualizado exitosamente');
-          this.mostrarInformacion = true;
-          this.ngOnInit();
-        }
-      );
-    }
   }
 
   onTelefonoInput(event: any) {

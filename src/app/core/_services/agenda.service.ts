@@ -21,8 +21,12 @@ export class AgendaService {
   // }
 
   constructor(private http: HttpClient) { }
+
   obtenerAgendas(): Observable<any> {
     return this.http.get(`${this.base_url}/obtenerAgendas`);
+  }
+  reportePorProfesional(): Observable<any> {
+    return this.http.get(`${this.base_url}/reportePorProfesional`);
   }
 
   obtenerAgendasPorRut(rutPaciente: string,id_profesional:string): Observable<any> {
@@ -56,5 +60,12 @@ export class AgendaService {
   contar(): Observable<any> {
     return this.http.get(`${this.base_url}/contar`);
   }
+  contarProfesionales(): Observable<any> {
+    return this.http.get(`${this.base_url}/contarProfesionales`);
+  }
+  contarPacientes(): Observable<any> {
+    return this.http.get(`${this.base_url}/contarPacientes`);
+  }
+
 }
 

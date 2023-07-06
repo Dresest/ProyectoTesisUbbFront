@@ -10,6 +10,7 @@ import { HttpInterceptorService } from './core/_services/http-interceptor.servic
 import { MessageService } from 'primeng/api';
 import { NopagefoundComponent } from './modules/pages/nopagefound/nopagefound.component';
 import { PagesComponent } from './modules/pages/pages.component';
+
 @NgModule({
   declarations: [
     AppComponent,

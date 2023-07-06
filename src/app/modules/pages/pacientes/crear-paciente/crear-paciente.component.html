@@ -1,110 +1,103 @@
 <div class="card">
     <div class="card-body">
-
-        <div class="row">
-            <div class="col-12">
-                <h4>Crear nuevo paciente</h4>
-
-                <form [formGroup]="pacienteForm">
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <label for="nombre" class="mr-2">Nombre:</label>
-                            <input type="text" placeholder="Ingrese un nombre" formControlName="nombre"
-                                class="form-control mr-2" required>
-                            <small class="text-danger"
-                                *ngIf="pacienteForm.get('nombre')?.touched && pacienteForm.get('nombre')?.errors?.['required']">
-                                El nombre es requerido
-                            </small>
-
-                            <label for="alergias" class="mr-2">Alergia:</label>
-                            <input type="text" placeholder="Ingrese alergias" formControlName="alergias"
-                                class="form-control" required>
-                            <small class="text-danger"
-                                *ngIf="pacienteForm.get('alergias')?.touched && pacienteForm.get('alergias')?.errors?.['required']">
-                                La alergia es requerido
-                            </small>
-                        </div>
-
-                        <div class="form-group col-md-2">
-                            <label for="apellido" class="mr-2">Apellido:</label>
-                            <input type="text" placeholder="Ingrese un apellido" formControlName="apellido"
-                                class="form-control">
-                            <small class="text-danger"
-                                *ngIf="pacienteForm.get('apellido')?.touched && pacienteForm.get('apellido')?.errors?.['required']">
-                                El apellido es requerido
-                            </small>
-                            <label for="telefono" class="mr-2">Teléfono:</label>
-                            <input type="text"  (input)="onTelefonoInput($event)" placeholder="+569 xxxxxxxx" formControlName="telefono"
-                                class="form-control" pattern="^[0-9]+$">
-                            <small class="text-danger"
-                                *ngIf="pacienteForm.get('telefono')?.touched && pacienteForm.get('telefono')?.errors?.['required']">
-                                El telefono es requerido
-                            </small>
-                        </div>
-
-                        <div class="form-group col-md-2">
-                            <label for="email" class="mr-2">Email:</label>
-                            <input type="text" placeholder="example@email.com" formControlName="email"
-                                class="form-control">
-                            <small class="text-danger"
-                                *ngIf="pacienteForm.get('email')?.touched && pacienteForm.get('email')?.errors?.['required']">
-                                El email es requerido
-                            </small>
-
-                            <label for="direccion" class="mr-2">Dirección:</label>
-                            <input type="text" placeholder="Ingrese una direccion" formControlName="direccion"
-                                class="form-control mr-2">
-                            <small class="text-danger"
-                                *ngIf="pacienteForm.get('direccion')?.touched && pacienteForm.get('direccion')?.errors?.['required']">
-                                La direccion es requerido
-                            </small>
-                        </div>
-
-                        <div class="form-group col-md-2">
-                            <label for="rut" class="mr-2">Rut:</label>
-                            <input type="text" placeholder="11.111.111-1" formControlName="rut" class="form-control"
-                                minlength="11" maxlength="12" (input)="onRutInput($event)">
-                            <small class="text-danger"
-                                *ngIf="pacienteForm.get('rut')?.touched && pacienteForm.get('rut')?.errors?.['required']">
-                                El rut es requerido
-                            </small>
-                            <label for="prevencion" class="mr-2">Prevencion:</label>
-                            <input type="text" placeholder="Ingrese una prevencion" formControlName="prevencion"
-                                class="form-control">
-                            <small class="text-danger"
-                                *ngIf="pacienteForm.get('prevencion')?.touched && pacienteForm.get('prevencion')?.errors?.['required']">
-                                La prevencion es requerido
-                            </small>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="edad" class="mr-2">edad:</label>
-                            <input type="text" (input)="onEdadInput($event)"placeholder="Ingrese una edad" formControlName="edad"
-                                class="form-control">
-                            <small class="text-danger"
-                                *ngIf="pacienteForm.get('edad')?.touched && pacienteForm.get('edad')?.errors?.['required']">
-                                La edad es requerido
-                            </small>
-
-
-                        </div>
-                    </div>
-
-
-                </form>
-
-
-
-                <button class="btn btn-primary mr-2" [disabled]="!pacienteForm.valid" (click)="guardarCambios()">
-                    Guardar
-                </button>
-
-
-                <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
-
-
+      <div class="row">
+        <div class="col-12">
+          <h4>Crear nuevo paciente</h4>
+  
+          <form [formGroup]="pacienteForm">
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                <label for="nombre" class="mr-2">Nombre:</label>
+                <input type="text" placeholder="Ingrese un nombre" formControlName="nombre" class="form-control mr-2"
+                  required>
+                <small class="text-danger"
+                  *ngIf="pacienteForm.get('nombre')?.touched && pacienteForm.get('nombre')?.errors?.['required']">
+                  El nombre es requerido
+                </small>
+  
+                <label for="alergias" class="mr-2">Alergia:</label>
+                <input type="text" placeholder="Ingrese alergias" formControlName="alergias" class="form-control"
+                  required>
+                <small class="text-danger"
+                  *ngIf="pacienteForm.get('alergias')?.touched && pacienteForm.get('alergias')?.errors?.['required']">
+                  La alergia es requerida
+                </small>
+              </div>
+  
+              <div class="form-group col-md-2">
+                <label for="apellido" class="mr-2">Apellido:</label>
+                <input type="text" placeholder="Ingrese un apellido" formControlName="apellido" class="form-control">
+                <small class="text-danger"
+                  *ngIf="pacienteForm.get('apellido')?.touched && pacienteForm.get('apellido')?.errors?.['required']">
+                  El apellido es requerido
+                </small>
+                <label for="telefono" class="mr-2">Teléfono:</label>
+                <input type="text" (input)="onTelefonoInput($event)" placeholder="+569 xxxxxxxx"
+                  formControlName="telefono" class="form-control" pattern="^[0-9]+$">
+                <small class="text-danger"
+                  *ngIf="pacienteForm.get('telefono')?.touched && pacienteForm.get('telefono')?.errors?.['required']">
+                  El telefono es requerido
+                </small>
+              </div>
+  
+              <div class="form-group col-md-2">
+                <label for="email" class="mr-2">Email:</label>
+                <input type="text" placeholder="example@email.com" formControlName="email" class="form-control">
+                <small class="text-danger"
+                  *ngIf="pacienteForm.get('email')?.touched && pacienteForm.get('email')?.errors?.['required']">
+                  El email es requerido
+                </small>
+  
+                <label for="direccion" class="mr-2">Dirección:</label>
+                <input type="text" placeholder="Ingrese una direccion" formControlName="direccion"
+                  class="form-control mr-2">
+                <small class="text-danger"
+                  *ngIf="pacienteForm.get('direccion')?.touched && pacienteForm.get('direccion')?.errors?.['required']">
+                  La direccion es requerida
+                </small>
+              </div>
+  
+              <div class="form-group col-md-2">
+                <label for="rut" class="mr-2">Rut:</label>
+                <input type="text" placeholder="11.111.111-1" formControlName="rut" class="form-control"
+                  minlength="11" maxlength="12" (input)="onRutInput($event)">
+                <small class="text-danger"
+                  *ngIf="pacienteForm.get('rut')?.touched && pacienteForm.get('rut')?.errors?.['required']">
+                  El rut es requerido
+                </small>
+                <label for="prevencion" class="mr-2">Prevencion:</label>
+                <input type="text" placeholder="Ingrese una prevencion" formControlName="prevencion"
+                  class="form-control">
+                <small class="text-danger"
+                  *ngIf="pacienteForm.get('prevencion')?.touched && pacienteForm.get('prevencion')?.errors?.['required']">
+                  La prevencion es requerida
+                </small>
+              </div>
+              
+              <div class="form-group col-md-2">
+                <div class="form-group mr-2">
+                  <label for="edad">Fecha de nacimiento:</label>
+                  <div class="d-flex align-items-center">
+                    <input type="text" placeholder="1/1/2023" formControlName="edad" class="form-control mr-2"
+                      matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </div>
+                  <small class="text-danger"
+                    *ngIf="pacienteForm.get('edad')?.touched && pacienteForm.get('edad')?.errors?.['required']">
+                    La fecha de nacimiento es requerida
+                  </small>
+                </div>
+              </div>
             </div>
-
-
+          </form>
+  
+          <button class="btn btn-primary mr-2" [disabled]="!pacienteForm.valid" (click)="guardarCambios()">
+            Guardar
+          </button>
+          <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+  

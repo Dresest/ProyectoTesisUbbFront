@@ -13,7 +13,7 @@ import { ToastService } from 'src/app/core/_services/toast.service';
 export class LoginComponent {
   hidePassUsuario = true;
   user:any;
-
+url:any;
   loginUsuario: UntypedFormGroup;
   
   emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
@@ -53,7 +53,9 @@ export class LoginComponent {
     });
   }
   
-
+  ngOnInit(): void {
+    console.log(this._authService.base_url);
+  }
 
   goToRecoverEmail(): void {
     this.router.navigate(['auth/forgot'])

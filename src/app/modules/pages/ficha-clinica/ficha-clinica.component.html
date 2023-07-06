@@ -23,15 +23,26 @@
               </a>
             </td>
             <td>
-              <button class="btn btn-primary" (click)="mostrarDetallesFicha(ficha.id_ficha)"><span
-                  class="mdi mdi-magnify"></span></button>
-                  <button class="btn btn-primary" (click)="EditarDetallesFicha(ficha.id_ficha)"
-                  [disabled]="diferenciaHoras(ficha.fecha_creacion) > 48">
-                  <span class="mdi mdi-pencil"></span>
-                </button>
-                
-              <button class="btn btn-primary" (click)="pdf(ficha.id_ficha)"><span
-                  class="mdi mdi-file-pdf-box"></span></button>
+              <button class="btn btn-primary" mat-raised-button matTooltip="Ver Ficha Clinica"
+                (click)="mostrarDetallesFicha(ficha.id_ficha)"><span class="mdi mdi-magnify"></span>
+              </button>
+
+              <button class="btn btn-primary custom-button" mat-raised-button
+              (click)="diferenciaHoras(ficha.fecha_creacion) <= 48 && EditarDetallesFicha(ficha.id_ficha)"
+              [ngClass]="{'disabled-button': diferenciaHoras(ficha.fecha_creacion) > 48, 'expired-button': diferenciaHoras(ficha.fecha_creacion) > 48}"
+              [matTooltip]="diferenciaHoras(ficha.fecha_creacion) > 48 ? 'No se puede editar después de 48 horas' : 'Editar Ficha Clínica'"
+              matTooltipClass="custom-tooltip">
+        <span class="mdi mdi-pencil"></span>
+      </button>
+      
+      
+
+      
+
+
+
+              <button class="btn btn-primary" mat-raised-button matTooltip="Descargar Ficha Clinica"
+                (click)="pdf(ficha.id_ficha)"><span class="mdi mdi-file-pdf-box"></span></button>
             </td>
           </tr>
         </tbody>
@@ -56,7 +67,8 @@
           <form [formGroup]="fichaClinicaForm">
             <div class="form-group">
               <label for="motivo_consulta">Motivo de consulta:</label>
-              <textarea formControlName="motivo_consulta"  [readonly]="mostrarInformacion" class="form-control" rows="3"></textarea>
+              <textarea formControlName="motivo_consulta" [readonly]="mostrarInformacion" class="form-control"
+                rows="3"></textarea>
               <small class="text-danger"
                 *ngIf="!mostrarInformacion && fichaClinicaForm.get('motivo_consulta')?.touched && fichaClinicaForm.get('motivo_consulta')?.errors?.['required']">
                 El motivo de consulta es requerido
@@ -65,7 +77,8 @@
 
             <div class="form-group">
               <label for="examen_fisico">Examen físico:</label>
-              <textarea formControlName="examen_fisico" [readonly]="mostrarInformacion" class="form-control" rows="3"></textarea>
+              <textarea formControlName="examen_fisico" [readonly]="mostrarInformacion" class="form-control"
+                rows="3"></textarea>
               <small class="text-danger"
                 *ngIf="!mostrarInformacion && fichaClinicaForm.get('examen_fisico')?.touched && fichaClinicaForm.get('examen_fisico')?.errors?.['required']">
                 El examen físico es requerido
@@ -73,7 +86,8 @@
             </div>
             <div class="form-group">
               <label for="intervencion">Intervención:</label>
-              <textarea formControlName="intervencion"  [readonly]="mostrarInformacion" class="form-control" rows="3"></textarea>
+              <textarea formControlName="intervencion" [readonly]="mostrarInformacion" class="form-control"
+                rows="3"></textarea>
               <small class="text-danger"
                 *ngIf="!mostrarInformacion && fichaClinicaForm.get('intervencion')?.touched && fichaClinicaForm.get('intervencion')?.errors?.['required']">
                 La intervención es requerida
@@ -81,7 +95,8 @@
             </div>
             <div class="form-group">
               <label for="indicaciones">Indicación:</label>
-              <textarea formControlName="indicaciones" [readonly]="mostrarInformacion" class="form-control" rows="3"></textarea>
+              <textarea formControlName="indicaciones" [readonly]="mostrarInformacion" class="form-control"
+                rows="3"></textarea>
               <small class="text-danger"
                 *ngIf="!mostrarInformacion && fichaClinicaForm.get('indicaciones')?.touched && fichaClinicaForm.get('indicaciones')?.errors?.['required']">
                 Las indicaciones son requeridas
@@ -199,7 +214,3 @@
     </div>
   </div>
 </div>
-
-
-
-
